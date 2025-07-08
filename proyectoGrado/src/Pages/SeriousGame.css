@@ -1,0 +1,32 @@
+/* SeriousGame.css */
+
+/* SeriousGame.css */
+
+.serious-game-container {
+  width: 1100px;
+  height: 618px; /* 1100 x 9/16 = 618 para 16:9 */
+  margin: 2rem auto;
+  overflow: hidden;
+  background-color: #000;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+#unity-canvas {
+  width: 1100px;
+  height: 618px;
+  display: block;
+  background-color: #000;
+  image-rendering: pixelated;
+  transform: scale(1);
+  transform-origin: top left;
+}
+
+
+@media (max-width: 768px) {
+  #unity-canvas {
+    width: 100%;
+    height: auto;
+  }
+}

@@ -1,0 +1,18 @@
+.banner-container {
+    width: 100%; /* Ocupa todo el ancho */
+    height: 300px; /* Altura fija */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    overflow: hidden; /* Oculta contenido adicional */
+    background-color: #eef4f7; /* Color de fondo de seguridad */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  }
+  
+  .banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen al tamaño del contenedor */
+    object-position: center; /* Centra la imagen */
+  }
+  

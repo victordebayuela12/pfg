@@ -1,0 +1,165 @@
+/* Estilos generales */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color:transparent;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+
+/* Contenedor principal */
+.diseases-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+/* Caja principal */
+.diseases-box {
+    background: white;
+    padding: 50px 60px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1100px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.diseases-title {
+  font-size: 2.2rem;
+  color: #005f73; /* Azul profesional */
+  margin-bottom: 15px;
+}
+
+.diseases-description {
+  font-size: 1.1rem;
+  color: #4f4f4f; /* Gris oscuro */
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+.treatment-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+/* Tabla */
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.modern-table th,
+.modern-table td{
+  overflow: visible;
+  white-space: normal;
+  text-overflow: unset;
+  max-width: 200px; /* Ajusta según columna */
+}
+
+/* Opcional: estilos específicos por columna */
+.modern-table th.nombre,
+.modern-table td.nombre {
+  width: 150px;
+  height: 100px;
+}
+.modern-table th.beneficios,
+.modern-table td.beneficios {
+  width: 200px;
+}
+.modern-table th.riesgos,
+.modern-table td.riesgos {
+  width: 200px;
+}
+.modern-table th.descripciones,
+.modern-table td.descripciones {
+  width: 250px;
+}
+
+.modern-table tbody tr:hover {
+  background-color: #f1f1f1; /* Efecto hover */
+}
+
+.actions-column {
+  display: flex;
+  gap: 10px; /* Espaciado entre botones */
+  justify-content: flex-start;
+}
+.no-action {
+  display: inline-block;
+  color: #999;
+  font-style: italic;
+  width: 100%;
+  text-align: center;
+}
+/* Botones de acción */
+.action-button {
+  width: 120px; /* o el valor que prefieras */
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  border-radius: 0px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+
+.edit-button {
+  background-color: #197d91; /* Verde */
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #005f73;
+}
+
+.delete-button {
+  background-color: #f44336; /* Rojo */
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Mensaje de éxito */
+.success-message {
+  color: #4caf50; /* Verde */
+  font-size: 1rem;
+  margin-top: 20px;
+}
+
+/* Mensaje de error */
+.error-message {
+  color: #f44336; /* Rojo */
+  font-size: 1rem;
+  margin-top: 20px;
+}
+
+.description-image {
+  width: 200px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.multiline-cell {
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow: visible;
+}
+
+.multiline-cell .disease-link {
+  display: inline-block;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.5;
+}

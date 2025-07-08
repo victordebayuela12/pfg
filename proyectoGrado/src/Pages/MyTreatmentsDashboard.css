@@ -1,0 +1,254 @@
+/* Estilos generales */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  font-size: 18px; /* Tamaño base aumentado */
+}
+
+/* Contenedor principal */
+.admin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px;
+  box-sizing: border-box;
+}
+.admin-list {
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+.admin-list h2 {
+  font-size: 1.6rem;
+  color: #005f73;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Caja principal */
+.admin-box {
+  background: white;
+  padding: 70px 80px;
+  border-radius: 15px;
+  box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1000px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.admin-box h1 {
+  font-size: 2.8rem;
+  color: #005f73;
+  margin-bottom: 20px;
+}
+
+.admin-box p {
+  font-size: 1.3rem;
+  color: #4f4f4f;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+/* Tabla */
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+}
+
+.modern-table th,
+.modern-table td {
+  font-family: 'Arial', sans-serif;
+  font-size: 17px;
+  text-align: left;
+  vertical-align: top;
+  padding: 12px 16px;
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 250px;
+}
+
+/* Anchos personalizados */
+.modern-table th.nombre,
+.modern-table td.nombre {
+  width: 180px;
+}
+.modern-table th.beneficios,
+.modern-table td.beneficios {
+  width: 250px;
+}
+.modern-table th.riesgos,
+.modern-table td.riesgos {
+  width: 250px;
+}
+.modern-table th.descripciones,
+.modern-table td.descripciones {
+  width: 280px;
+}
+
+.modern-table th.comentario,
+.modern-table td.comentario {
+  width: 250px;
+}
+
+
+/* Encabezado tabla */
+.modern-table th {
+  background-color: #005f73;
+  color: white;
+  font-weight: bold;
+}
+
+/* Hover fila */
+.modern-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Columna de acciones */
+.actions-column {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+/* Botones de acción */
+.action-button {
+  border: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.edit-button {
+  background-color: #197d91;
+  color: white;
+}
+.edit-button:hover {
+  background-color: #005f73;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+}
+.delete-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Mensajes */
+.success-message {
+  color: #4caf50;
+  font-size: 1.1rem;
+  margin-top: 20px;
+}
+.error-message {
+  color: #f44336;
+  font-size: 1.1rem;
+  margin-top: 20px;
+}
+
+/* Imagen en descripciones */
+.description-image {
+  width: 240px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+/* Botón Ver más en tabla */
+.ver-mas-icono {
+  background: none;
+  border: none;
+  color: #197d91;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.ver-mas-icono:hover {
+  color: #005f73;
+  text-decoration: none;
+}
+
+/* Estilos modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px 40px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #005f73;
+}
+
+.modal-content p {
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.modal-content button {
+  margin-top: 20px;
+  background-color: #197d91;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.modal-content button:hover {
+  background-color: #005f73;
+}
+.action-button {
+  width: 120px; /* o el valor que prefieras */
+  text-align: center;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  border-radius: 0px;
+  vertical-align: middle;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s ease;
+}
+.edit-button {
+  background-color: #197d91;
+  color: white;
+}

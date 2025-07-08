@@ -1,0 +1,271 @@
+/* Contenedor principal de edición */
+.edit-disease-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: transparent;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Caja del formulario */
+.edit-disease-box {
+  background: white;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+  box-sizing: border-box;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.edit-disease-box h1 {
+  font-size: 2.8rem; /* Tamaño destacado */
+  margin-bottom: 20px;
+  color: #005f73; /* Azul profesional */
+  font-weight: 700; /* Hace que destaque */
+}
+.edit-disease-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Formulario */
+.disease-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.disease-form h3 {
+  font-size: 1.2rem;
+  color: #003f4f;
+  margin-bottom: 10px;
+}
+
+/* Inputs y textarea */
+.disease-form input,
+.disease-form textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.disease-form input:focus,
+.disease-form textarea:focus {
+  border-color: #00788a;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Botones */
+.button-large,
+.button-treatments,
+.button-add-description,
+.button-close,
+.select-treatment-btn {
+  background: linear-gradient(135deg, #005f73, #003f4f);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button-large:hover,
+.button-treatments:hover,
+.button-add-description:hover,
+.button-close:hover,
+.select-treatment-btn:hover {
+  background: linear-gradient(135deg, #00788a, #005f73);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Descripciones */
+.description-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 10px 0;
+}
+
+.description-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  position: relative;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.description-box p {
+  margin: 0;
+  line-height: 1.5;
+  max-width: 100%;
+}
+
+.description-box img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-left: 15px;
+}
+
+.description-box button {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.description-box button:hover {
+  background-color: #d32f2f;
+}
+
+/* Tratamientos */
+.treatment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.treatment-selected {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.treatment-selected p {
+  color: #00788a;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 500;
+  margin: 0;
+}
+
+.treatment-selected p:hover {
+  color: #005f73;
+}
+
+.treatment-selected button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.treatment-selected button:hover {
+  background-color: #d32f2f;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  padding: 30px 40px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal h2 {
+  margin-top: 0;
+  color: #003f4f;
+  text-align: center;
+}
+
+.treatment-list {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.treatment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.select-treatment-btn.added {
+  background: linear-gradient(135deg, #d32f2f, #b71c1c);
+}
+
+.select-treatment-btn.added:hover {
+  background: linear-gradient(135deg, #ff5c5c, #d32f2f);
+}
+.button-delete {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: #f44336;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.3s ease;
+}
+
+.button-delete:hover {
+  background-color: #d32f2f;
+}

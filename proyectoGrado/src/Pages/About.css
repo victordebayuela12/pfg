@@ -1,0 +1,73 @@
+/* Estilos generales */
+body {
+  font-family: 'Poppins', Arial, sans-serif; /* Fuente moderna */
+  background-color:transparent;
+  margin: 0;
+  padding: 0;
+  color: #333; /* Texto principal */
+}
+
+/* Contenedor principal */
+.about-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Altura mínima para cubrir toda la pantalla */
+  padding: 20px; /* Espaciado para pantallas más pequeñas */
+  background-color:linear-gradient(135deg, #d9f2f7, #a6dced);  /* Fondo consistente con otras páginas */
+}
+
+/* Caja principal */
+.about-box {
+  text-align: center;
+  background-color: white; /* Fondo blanco */
+  padding: 50px 40px; /* Espaciado interno más generoso */
+  border-radius: 20px; /* Bordes redondeados */
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  max-width: 750px; /* Ancho máximo */
+  width: 90%; /* Responsivo */
+  border: 1px solid #e0e0e0; /* Borde fino */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-box:hover {
+  transform: translateY(-5px); /* Elevación ligera */
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15); /* Más profundidad */
+}
+
+/* Título */
+.about-box h1 {
+  font-size: 2.8rem; /* Tamaño destacado */
+  margin-bottom: 20px;
+  color: #005f73; /* Azul profesional */
+  font-weight: 700; /* Hace que destaque */
+}
+
+/* Párrafos */
+.about-box p {
+  font-size: 1.2rem; /* Tamaño de texto claro */
+  color: #4f4f4f; /* Gris oscuro */
+  margin-bottom: 30px;
+  line-height: 1.8; /* Mejor legibilidad */
+}
+
+/* Botones */
+.about-box a {
+  text-decoration: none;
+  color: white; /* Texto blanco */
+  background-color: #005f73; /* Azul fuerte */
+  padding: 14px 36px; /* Botón más grande */
+  border-radius: 8px; /* Bordes suaves */
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 10px; /* Espaciado entre botones */
+  display: inline-block;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.about-box a:hover {
+  background-color: #003f4f; /* Azul más oscuro */
+  transform: translateY(-3px); /* Movimiento ligero */
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.2); /* Más sombra */
+}

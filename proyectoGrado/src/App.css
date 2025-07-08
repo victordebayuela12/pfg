@@ -1,0 +1,85 @@
+/* General */
+.App {
+  text-align: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Logo animado (puedes eliminar si no lo usas) */
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+  animation: App-logo-spin infinite 20s linear;
+}
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Layout principal */
+.main-container {
+  display: flex;
+  min-height: 100vh;
+    align-items: stretch;
+  width: 100vw;
+  background: transparent;
+}
+
+/* Barra lateral */
+.navbar-container {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100vh;
+  z-index: 1000;
+}
+
+/* Contenido principal desplazado */
+.content-container {
+
+  flex: 1;
+  overflow-y: auto;
+  height: 100vh;
+  padding: 40px;
+  box-sizing: border-box;
+  
+}
+
+/* Rutas sin navbar */
+.centered-layout .navbar-container {
+  display: none;
+}
+.centered-layout .content-container {
+  margin-left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0; /* ✅ Sin huecos */
+  height: 100vh;
+  width: 100vw; /* ✅ asegura que use todo el ancho */
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+
+/* Responsive: pantallas pequeñas */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+  }
+
+  .navbar-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .content-container {
+    margin-left: 0;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
+}

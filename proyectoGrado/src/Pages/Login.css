@@ -1,0 +1,117 @@
+/* Estilos generales */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color:transparent;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor principal */
+.login-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 100vh; /* Ocupa toda la pantalla */
+  padding: 20px;
+  box-sizing: border-box;
+
+}
+
+/* Caja principal */
+.login-box {
+  background: white;
+  padding: 70px 70px;
+  border-radius: 15px;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  width: 100%;
+  max-width: 750px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.login-title {
+  font-size: 2.2rem;
+  color: #005f73; /* Azul profesional */
+  margin-bottom: 15px;
+}
+
+.login-description {
+  font-size: 1.1rem;
+  color: #4f4f4f; /* Gris oscuro */
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* Formulario */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espaciado entre campos */
+}
+
+.form-input {
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #005f73; /* Azul profesional */
+}
+
+/* Botón */
+.form-button {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: #005f73; /* Azul fuerte */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.form-button:hover {
+  background-color: #003f4f; /* Azul más oscuro */
+  transform: translateY(-3px); /* Efecto hover */
+}
+
+/* Mensaje de error */
+.error-message {
+  color: red;
+  font-size: 1rem;
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+/* Pie de formulario */
+.form-footer {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 20px;
+}
+
+.form-footer a {
+  color: #005f73;
+  text-decoration: none;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+.login-box{
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-box:hover {
+  transform: translateY(-5px); /* Igual que en about-box */
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+}

@@ -1,0 +1,181 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+  background-color:transparent;
+  color: #333; /* Texto oscuro */
+  height: 100%; /* Altura completa */
+  overflow: hidden; 
+  background-color: white; /* o #f0f0f0, si quieres uno claro */
+
+}
+
+/* Contenedor principal */
+.home-container {
+  margin:0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 100vh;       /* alto: pantalla completa */
+  width: 100vw;
+  max-width: 100vw; 
+      /* 👈 añade esto */
+}
+
+/* Columna izquierda */
+/* Contenedor principal de la columna izquierda */
+.home-left {
+  width: 50%;
+  height: 100%;
+  margin:0;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white; /* Fondo claro */
+  position: relative; 
+  padding:0;/* Necesario para posicionar el reflejo */
+    border-left: 100px solid transparent;    
+}
+
+.home-right {
+  flex: 1;
+  height: 100%;
+  width: 50%;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+/* Viewport fijo para evitar scroll */
+.home-viewport {
+  width: 100%;
+  
+  overflow: hidden;
+}
+
+/* Ajustamos body y html también */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Contenedor de la imagen principal */
+.home-logo-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Imagen principal */
+.home-logo {
+  max-width: 70%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Reflejo debajo de la imagen */
+.home-logo-container::after {
+  content: '';
+  position: absolute;
+  top: 50%; /* Ubicado justo debajo de la imagen */
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../resources/Logo.png'); /* La misma imagen */
+  background-repeat: no-repeat;
+  background-size: contain; /* Asegura que encaje en el contenedor */
+  transform: scaleY(-1); /* Voltea verticalmente */
+  opacity: 0.4; /* Hace que el reflejo sea translúcido */
+  filter: blur(8px); /* Aplica desenfoque para simular un reflejo */
+}
+
+/* Columna derecha */
+.home-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ /* Fondo blanco para claridad */
+  padding: 40px;
+}
+
+/* Cuadro de login */
+.home-box {
+  background: white;
+  padding: 50px;
+  border-radius: 15px;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  width: 100%;
+  max-width: 750px;
+  text-align: center;
+  color: #333;
+}
+.home-box {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-box:hover {
+  transform: translateY(-5px); /* Igual que en about-box */
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+
+.home-title {
+  font-size: 2rem;
+  color: #005f73;
+  margin-bottom: 20px;
+}
+
+.home-description {
+  font-size: 1.1rem;
+  color: #4f4f4f;
+  margin-bottom: 30px;
+  line-height: 1.8;
+}
+
+/* Botones */
+.home-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.home-button {
+  text-decoration: none;
+  color: white;
+  padding: 15px 40px;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.home-button.primary {
+  background-color: #005f73;
+}
+
+.home-button.primary:hover {
+  background-color: #003f4f;
+}
+
+.home-button.secondary {
+  background-color: #a6dced;
+  color: #005f73;
+}
+
+.home-button.secondary:hover {
+  background-color: #5ab9d6;
+}

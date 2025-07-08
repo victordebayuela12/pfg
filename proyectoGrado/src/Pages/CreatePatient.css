@@ -1,0 +1,254 @@
+/* Contenedor principal */
+.create-patient-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color:transparent;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Caja del formulario */
+.create-patient-box {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 700px;
+  box-sizing: border-box;
+}
+
+/* Título */
+.create-patient-box h1 {
+  font-size: 2.8rem; /* Tamaño destacado */
+  margin-bottom: 20px;
+  color: #005f73; /* Azul profesional */
+  font-weight: 700; /* Hace que destaque */
+}
+/* Formulario */
+.patient-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Campos de entrada */
+.patient-form input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.patient-form input:focus {
+  border-color: #00788a;
+  outline: none;
+}
+
+
+/* Botones */
+.button-uniform,
+.button-large {
+  background: linear-gradient(135deg, #005f73, #003f4f);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button-uniform:hover,
+.button-large:hover {
+  background: linear-gradient(135deg, #00788a, #005f73);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  
+}
+
+/* Tabla de tratamientos */
+.treatment-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.treatment-table th, .treatment-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.treatment-table th {
+  background: #00788a;
+  color: white;
+}
+
+.treatment-table tr:hover {
+  background: #e0f7fa;
+  
+}
+
+/* Botón eliminar tratamiento */
+.remove-treatment {
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.remove-treatment:hover {
+  background: #d32f2f;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+.modal h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #003f4f;
+}
+
+/* Lista de enfermedades en modal */
+.disease-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+
+.disease-item {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.disease-item:hover {
+  background: #e0f7fa;
+  border-color: #00acc1;
+}
+
+/* Botón de cerrar modal */
+.button-close {
+  background: #dc3545;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 1rem;
+}
+
+.button-close:hover {
+  background: #b02a37;
+}
+
+.create-patient-box {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.create-patient-box:hover {
+  transform: translateY(-5px); /* Igual que en about-box */
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.preview-modal {
+  background: linear-gradient(to bottom, #ffffff, #f8fcfc);
+  padding: 40px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 650px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  text-align: left;
+  animation: fadeIn 0.3s ease;
+}
+
+ .preview-modal{
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+ }
+.preview-modal:hover{
+    transform: translateY(-5px); /* Igual que en about-box */
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+}
+.preview-modal h2 {
+  text-align: center;
+  color: #003f4f;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+}
+
+.preview-section {
+  margin-bottom: 25px;
+}
+
+.preview-section h4 {
+  color: #197d91;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.preview-card {
+  border: 1px solid #e0f2f1;
+  background: #f9ffff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.preview-card img {
+  margin-top: 8px;
+  max-width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}

@@ -1,0 +1,181 @@
+/* General container */
+.disease-details-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background-color:transparent;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+/* Main box */
+.disease-details-box {
+  background: white;
+  padding: 50px 60px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1000px;
+  box-sizing: border-box;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.info-box {
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-align: left;
+}
+
+.disease-title {
+  font-size: 1.9rem;
+  margin-bottom: 10px;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+
+/* Títulos de secciones (Descripciones, Tratamientos...) */
+.section-title {
+  font-size: 1.8rem;
+  color: #0077b6;
+  margin: 40px 0 20px;
+  border-bottom: 2px solid #caf0f8;
+  padding-bottom: 8px;
+  text-align: center; /* 👈 CENTRADO */
+}
+
+.disease-resume {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  color: #444;
+}
+
+/* Resume box */
+.resume-box {
+  background: #f1f9ff;
+  border-left: 4px solid #00b4d8;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Grid for descriptions and treatments */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* Individual card */
+
+.card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+  margin-top: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Treatment block */
+.treatment-card {
+  background: #eaf4fb;
+  border-left: 5px solid #0096c7;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+}
+
+/* Subtítulo dentro de tarjetas si usas <h4> */
+.treatment-card h4 {
+  text-align: center; /* 👈 CENTRADO */
+  color: #023e8a;
+  margin-bottom: 10px;
+}
+
+/* Buttons */
+.button-group-centered {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.button-uniform {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.approve-button {
+  background-color: #38b000;
+  color: white;
+}
+
+.reject-button {
+  background-color: #d90429;
+  color: white;
+}
+
+.approve-button:hover {
+  background-color: #2d8700;
+}
+
+.reject-button:hover {
+  background-color: #a8001a;
+}
+
+/* Messages */
+.error-message {
+  color: #d90429;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.success-message {
+  color: #38b000;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-align: center;
+}
