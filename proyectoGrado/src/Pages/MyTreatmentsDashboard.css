@@ -58,6 +58,8 @@ body {
   width: 100%;
   border-collapse: collapse;
   margin-top: 30px;
+
+
 }
 
 .modern-table th,
@@ -70,8 +72,8 @@ body {
   border-bottom: 1px solid #ddd;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 250px;
+  
+ 
 }
 
 /* Anchos personalizados */
@@ -80,13 +82,16 @@ body {
   width: 180px;
 }
 .modern-table th.beneficios,
-.modern-table td.beneficios {
-  width: 250px;
-}
+.modern-table td.beneficios,
 .modern-table th.riesgos,
 .modern-table td.riesgos {
   width: 250px;
+  max-width: 250px;
+  white-space: normal;       /* permite saltos de línea */
+  overflow-wrap: break-word; /* fuerza corte de palabra si es larga */
+  word-break: break-word;
 }
+
 .modern-table th.descripciones,
 .modern-table td.descripciones {
   width: 280px;

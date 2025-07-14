@@ -179,7 +179,7 @@ const closePreviewModal = () => {setSelectedTreatmentDetails(null);
       alert("Versión de enfermedad creada con éxito.");
       setFormData({ name: "", resume: "", descriptions: [], selectedTreatments: [] });
     } catch (err) {
-      console.error("❌ Error:", err.response?.data || err.message);
+      console.error("Error:", err.response?.data || err.message);
       alert("Hubo un problema al crear la enfermedad.");
     }
   };
@@ -250,7 +250,7 @@ const closePreviewModal = () => {setSelectedTreatmentDetails(null);
                     descriptions: prev.descriptions.filter((_, j) => j !== i),
                   }))
                 }>
-                  ×
+                  
                 </button>
               </div>
             ))}
@@ -290,7 +290,7 @@ const closePreviewModal = () => {setSelectedTreatmentDetails(null);
         </form>
       </div>
 
-      {/* Modal de selección de tratamientos */}
+     {/*Modal de los tratamientos */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
@@ -328,7 +328,7 @@ const closePreviewModal = () => {setSelectedTreatmentDetails(null);
         </div>
       )}
 
-      {/* Modal de vista previa del tratamiento */}
+      {/* Modal vista previa del tratamiento */}
       {selectedTreatmentDetails && (
         <div className="modal-overlay">
           <div className="modal">

@@ -80,17 +80,17 @@ function MyPatientsDashboard() {
                       <td><p className="table-cell">{patient.name}</p></td>
                       <td><p className="table-cell">{patient.email}</p></td>
                       <td>
-                        <p className="table-cell">
-                          {approvedId ? (
-                            <Link to={`/disease/${patient.disease?.version_aprobada?._id}`}>
+                      <p className="table-cell">
+                        {approvedId ? (
+                          <Link to={`/disease/${approvedId}`} className="disease-link">
 
-                              {patient.disease?.name || 'Sin asignar'}
-                            </Link>
-                          ) : (
-                            <span>{patient.disease?.name || 'Sin asignar'}</span>
-                          )}
-                        </p>
-                      </td>
+                            {patient.disease?.name || 'Ver enfermedad'}
+                          </Link>
+                        ) : (
+                          <span>{patient.disease?.name || 'Sin asignar'}</span>
+                        )}
+                      </p>
+                    </td>
                       <td>
                         <div className="description-preview">
                           {Array.isArray(patient.treatments) && patient.treatments.length > 0 ? (

@@ -15,7 +15,7 @@ body {
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 /* Caja principal */
@@ -37,7 +37,7 @@ body {
 }
 
 .diseases-description {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #4f4f4f; /* Gris oscuro */
   margin-bottom: 30px;
   line-height: 1.6;

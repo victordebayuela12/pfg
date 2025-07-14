@@ -106,8 +106,8 @@ const navigate = useNavigate();
                     {renderFieldWithModal(treatment.name,20)}
                   </Link>
                 </td>
-                <td>{renderFieldWithModal(treatment.benefits)}</td>
-                <td>{renderFieldWithModal(treatment.risks)}</td>
+                <td className="beneficios">{renderFieldWithModal(treatment.benefits)}</td>
+<td className="riesgos">{renderFieldWithModal(treatment.risks)}</td>
                 <td>
                 
   {treatment.descriptions?.length > 0 ? (

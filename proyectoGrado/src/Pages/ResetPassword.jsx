@@ -3,11 +3,7 @@ import './ResetPassword.css';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 
 function ResetPassword() {
-    console.log("Componente ResetPassword cargado");
-
- 
-
-
+  console.log("Componente ResetPassword cargado");
 
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -15,9 +11,9 @@ function ResetPassword() {
   const token = searchParams.get('token');
   const type = searchParams.get('type');
 
-    console.log("Token:", token);
-  console.log("Tipo:", type);
+  const isLoggedIn = !token && localStorage.getItem('jwtToken');
 
+  const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -36,37 +32,67 @@ function ResetPassword() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/auth/reset-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token, newPassword, type })
-      });
+      let response;
+
+      if (isLoggedIn) {
+        response = await fetch('http://localhost:5000/auth/change-password', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('jwtToken')}`,
+          },
+          body: JSON.stringify({ oldPassword, newPassword }),
+        });
+      } else {
+        response = await fetch('http://localhost:5000/auth/reset-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token, newPassword, type }),
+        });
+      }
 
       const data = await response.json();
 
       if (response.ok) {
-        setMessage(data.message);
-        setTimeout(() => navigate('/login'), 3000); // redirige tras 3s
+        setMessage(data.message || 'Contraseña actualizada correctamente.');
+        setTimeout(() => navigate('/login'), 3000);
       } else {
         setError(data.message || 'Error al actualizar la contraseña.');
       }
     } catch (err) {
+      console.error(err);
       setError('Error de conexión con el servidor.');
     }
   };
 
-  if (!token || !type) {
-    return <p className="error-message">❌ Enlace de recuperación no válido.</p>;
+  if (!token && !isLoggedIn) {
+    return <p className="error-message">❌ No tienes acceso a esta página.</p>;
   }
 
   return (
     <div className="reset-container">
       <div className="reset-box">
-        <h2 className="reset-title">Nueva contraseña</h2>
+        <h2 className="reset-title">Cambiar contraseña</h2>
         <p className="reset-description">
-          Introduce y confirma tu nueva contraseña.
+          {isLoggedIn
+            ? 'Introduce tu contraseña actual y la nueva.'
+            : 'Introduce y confirma tu nueva contraseña.'}
         </p>
+
         <form onSubmit={handleSubmit} className="reset-form">
+          {isLoggedIn && (
+            <div className="input-wrapper">
+              <input
+                type="password"
+                placeholder="Contraseña actual"
+                value={oldPassword}
+                onChange={(e) => setOldPassword(e.target.value)}
+                className="form-input"
+                required
+              />
+            </div>
+          )}
+
           <div className="input-wrapper">
             <input
               type={showPassword ? 'text' : 'password'}
@@ -84,17 +110,23 @@ function ResetPassword() {
               placeholder="Confirmar contraseña"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className={`form-input ${confirmPassword && newPassword !== confirmPassword ? 'input-error' : ''}`}
+              className={`form-input ${
+                confirmPassword && newPassword !== confirmPassword ? 'input-error' : ''
+              }`}
               required
             />
           </div>
 
-          <button type="submit" className="form-button">Guardar contraseña</button>
+          <button type="submit" className="form-button">
+            Guardar contraseña
+          </button>
         </form>
+
         {message && <p className="success-message">{message}</p>}
         {error && <p className="error-message">{error}</p>}
+
         <div className="form-footer">
-          <a href="/login">Volver al inicio de sesión</a>
+          <a href="/login">Volver</a>
         </div>
       </div>
     </div>

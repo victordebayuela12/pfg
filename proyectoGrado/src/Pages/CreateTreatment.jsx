@@ -132,12 +132,12 @@ const resizeImage = (file, maxWidth = 800, maxHeight = 600) => {
     return (
         <div className="create-treatment-container">
             <div className="create-treatment-box">
-                <h1>🩺 Crear Tratamiento</h1>
+                <h1> Crear Tratamiento</h1>
                 {error && <p className="error-message">{error}</p>}
                 {success && <p className="success-message">{success}</p>}
 
                 <form className="treatment-form" onSubmit={handleSubmit}>
-                    <h3>📌 Información General</h3>
+                    <h3> Información General</h3>
                     <input
                         type="text"
                         name="name"
@@ -161,7 +161,7 @@ const resizeImage = (file, maxWidth = 800, maxHeight = 600) => {
                         required
                     ></textarea>
 
-                    <h3>📸 Añadir Descripciones</h3>
+                    <h3> Añadir Descripciones</h3>
                     <textarea
                         placeholder="Descripción detallada"
                         value={descriptionInput}
@@ -175,7 +175,7 @@ const resizeImage = (file, maxWidth = 800, maxHeight = 600) => {
                         className="input-file"
                     />
                     <button type="button" className="button-modern" onClick={handleAddDescription}>
-                        ➕ Añadir Descripción
+                         Añadir Descripción
                     </button>
 
                     {formData.descriptions.map((desc, index) => {
@@ -199,7 +199,7 @@ const resizeImage = (file, maxWidth = 800, maxHeight = 600) => {
                                     type="button"
                                     onClick={() => handleRemoveDescription(index)}
                                 >
-                                    🗑️ Eliminar
+                                    
                                 </button>
                             </div>
                         );
@@ -227,7 +227,7 @@ const resizeImage = (file, maxWidth = 800, maxHeight = 600) => {
                     })()}
 
                     <button type="submit" className="button-modern button-large">
-                        💾 Guardar Tratamiento
+                        Guardar Tratamiento
                     </button>
                 </form>
             </div>

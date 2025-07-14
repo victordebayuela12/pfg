@@ -181,3 +181,24 @@ console.log("Token generado:", token);
     res.status(500).json({ message: "Error al iniciar sesión.", error });
   }
 };
+
+
+exports.changePasswordWithSession = async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+  const userId = req.user_id;
+
+  try {
+    const user = await User.findById(userId);
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'La contraseña actual no es correcta.' });
+    }
+
+    user.password = await bcrypt.hash(newPassword, 10);
+    await user.save();
+    res.json({ message: 'Contraseña actualizada correctamente.' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error al cambiar la contraseña.' });
+  }
+};

@@ -160,7 +160,7 @@ const renderFieldWithModal = (text,long) => {
     <div className="admin-container">
       <div className="admin-box">
         <h1>Mis Enfermedades</h1>
-        <p>Aquí puedes ver las enfermedades que has creado y su estado.</p>
+    
         {error && <p className="error-message">{error}</p>}
         {success && <p className="success-message">{success}</p>}
         {renderTable('Pendientes', pendingDiseases)}

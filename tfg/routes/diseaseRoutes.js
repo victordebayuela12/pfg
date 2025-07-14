@@ -5,7 +5,7 @@ const authenticateJWT = require('../middleware/authenticateJWT');
 // 🔹 Obtener todas las enfermedades
 router.get('/', diseaseController.getAllDiseases);
 
-router.get('/diseases/:id/approved-version', diseaseController.getApprovedVersionByDiseaseId);
+router.get('/:id/approved-version', diseaseController.getApprovedVersionByDiseaseId);
 
 // 🔹 Crear una nueva enfermedad (solo nombre)
 router.post('/', diseaseController.createDisease);

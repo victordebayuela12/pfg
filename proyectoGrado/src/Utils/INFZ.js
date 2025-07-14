@@ -1,14 +1,15 @@
 export function contarSilabas(palabra) {
-  palabra = palabra.toLowerCase().replace(/[^a-záéíóúüñ]/g, "");
-  const vocales = "aeiouáéíóúü";
+  palabra = palabra.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // quitar tildes
+  const vocales = "aeiou";
   let contador = 0;
+  let anteriorEsVocal = false;
 
-  for (let i = 0; i < palabra.length; i++) {
-    if (vocales.includes(palabra[i])) {
-      if (i === 0 || !vocales.includes(palabra[i - 1])) {
-        contador++;
-      }
+  for (let letra of palabra) {
+    const esVocal = vocales.includes(letra);
+    if (esVocal && !anteriorEsVocal) {
+      contador++;
     }
+    anteriorEsVocal = esVocal;
   }
 
   return Math.max(1, contador);

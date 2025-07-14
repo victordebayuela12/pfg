@@ -89,27 +89,27 @@ exports.updateApprovedVersion = async (req, res) => {
     res.status(500).json({ message: "Error al actualizar la versión aprobada.", error: error.message });
   }
 };
+
+
 exports.getApprovedVersionByDiseaseId = async (req, res) => {
   const { id } = req.params;
-  try {
-    const approvedVersion = await DiseaseVersion.findOne({
-      disease: id,
-      status: 'approved'
-    })
-    .populate('treatments') // opcional
-    .populate('doctorCreador'); 
-    // si quieres más contexto
 
-    if (!approvedVersion) {
+  try {
+    const disease = await Disease.findById(id)
+      .populate({
+        path: 'version_aprobada',
+        populate: ['treatments', 'doctorCreador']
+      });
+
+    if (!disease || !disease.version_aprobada) {
       return res.status(404).json({ message: 'No hay versión aprobada para esta enfermedad.' });
     }
 
-    res.status(200).json(approvedVersion);
+    res.status(200).json(disease.version_aprobada);
   } catch (error) {
     console.error('Error al obtener versión aprobada:', error);
     res.status(500).json({ message: 'Error al buscar la versión aprobada' });
   }
-
 };
 
 exports.getTreatmentsFromApprovedVersion = async (req, res) => {

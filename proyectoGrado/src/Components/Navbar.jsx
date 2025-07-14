@@ -20,11 +20,12 @@ const Navbar = () => {
     setTimeout(() => setIsRotating(false), 500);
     };
 
-    const handleLogout = () => {
-        localStorage.clear(); // Limpiar el rol del almacenamiento local
-        setRole(null); // Actualizar el estado del rol
-        navigate('/'); // Redirigir al usuario a la página principal
-    };
+const handleLogout = () => {
+  localStorage.clear();
+  setRole(null);
+  navigate('/');
+  window.location.reload(); // fuerza actualización del estado en toda la app
+};
 
     useEffect(() => {
         const updateRole = () => {
@@ -67,11 +68,14 @@ const Navbar = () => {
                     {role === 'admin' && <li><Link to="/treatmentsDash">Dashboard Tratamientos</Link></li>}
                     <li><Link to="/about">Contacto</Link></li>
                     {role && (
-                        <li>
-                            <button onClick={handleLogout} className="logout-button">
-                                Cerrar sesión
-                            </button>
-                        </li>
+                        <>
+                    <li><Link to="/reset-password">Cambiar contraseña</Link></li>
+                    <li>
+                    <button onClick={handleLogout} className="logout-button">
+                        Cerrar sesión
+                    </button>
+                    </li>
+                </>
                     )}
                 </ul>
             </nav>
