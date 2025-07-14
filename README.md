@@ -15,3 +15,6 @@ npm install
 ### 2. Acceder a la web
 
 Accede a http://localhost:5173/
+Accede con:
+- email: admin@example.com
+- password: admin
