@@ -1,15 +1,17 @@
-## Cómo ejecutar el proyecto
+##  Cómo ejecutar el proyecto
 
 ### 1. Clonar el repositorio
 
-Dentro de bash:
+Abre la terminal y escribe:
+
+```bash
 git clone https://github.com/victordebayuela12/pfg.git
 cd pfg
-cd ProyectoDeFinDeGrado
-cd tfg 
+cd ProyectoDeFinDeGrado/tfg
 npm install
-cd ..
-cd proyectoGrado
+cd ../proyectoGrado
 npm install
--------------
-Ahora dentro del navegador , nos dirigimos a la url: http://localhost:5173/
+```
+### 2. Acceder a la web
+
+Accede a http://localhost:5173/
