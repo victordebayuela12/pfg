@@ -22,9 +22,15 @@ function CreatePatient() {
         fetchDiseases();
     }, []);
 
-// Cambios relevantes dentro del archivo CreatePatient.jsx
+const generateRandomPassword = (length = 10) => {
+  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+  let password = '';
+  for (let i = 0; i < length; i++) {
+    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return password;
+};
 
-// ✅ fetchDiseases modificado
 const fetchDiseases = async () => {
     try {
         const token = localStorage.getItem("jwtToken");
@@ -105,7 +111,7 @@ const handleSelectDisease = async (diseaseId) => {
 
         const token = localStorage.getItem("jwtToken");
         const doctorId = localStorage.getItem("userId");
-
+        const generatedPassword = generateRandomPassword(); 
         if (!doctorId) {
             alert("No se encontró el ID del doctor en localStorage.");
             return;
@@ -114,7 +120,7 @@ const handleSelectDisease = async (diseaseId) => {
         const formDataToSend = {
             name: formData.name,
             email: formData.email,
-            password: "hola",
+            password: generatedPassword,
             doctor: doctorId,
             disease: formData.selectedDisease,
             treatments: formData.selectedTreatments
