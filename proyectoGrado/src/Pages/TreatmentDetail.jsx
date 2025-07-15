@@ -36,7 +36,7 @@ function TreatmentDetail() {
         { status, comment },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      navigate('/treatments');
+      navigate('/treatmentsDash'); // ✅ Cambio aquí
     } catch (err) {
       console.error(`Error al cambiar el estado a ${status}:`, err);
       setError('No se pudo cambiar el estado del tratamiento.');
@@ -71,24 +71,30 @@ function TreatmentDetail() {
 
         {role === 'admin' && treatment.status === 'pending' && (
           <div className="button-group-centered">
-            <button className="button-uniform approve-button" onClick={() => handleStatusChange('approved')}>
+            <button
+              className="button-uniform approve-button"
+              onClick={() => handleStatusChange('approved')}
+            >
               ✅ Aprobar
             </button>
-            <button className="button-uniform reject-button" onClick={() => setIsModalOpen(true)}>
+            <button
+              className="button-uniform reject-button"
+              onClick={() => setIsModalOpen(true)}
+            >
               ❌ Rechazar
             </button>
           </div>
         )}
-</div>
-        <RejectionModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onConfirm={(comment) => {
-            handleStatusChange('rejected', comment);
-            setIsModalOpen(false);
-          }}
-        />
-      
+      </div>
+
+      <RejectionModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={async (comment) => {
+          await handleStatusChange('rejected', comment);
+          
+        }}
+      />
     </div>
   );
 }

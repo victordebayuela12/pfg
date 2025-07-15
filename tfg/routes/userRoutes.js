@@ -23,7 +23,7 @@ router.get('/doctors/rejected', userController.getRejectedDoctors);
 router.patch('/doctors/:id/status', userController.approveOrRejectUser);
 
 // Eliminar un doctor
-router.delete('/doctors/:id', userController.deleteDoctor);
+router.delete('/doctors/:id', userController.deleteUser);
 
 router.get('/userdata', authenticateJWT, userController.getAuthenticatedUser);
 

@@ -11,8 +11,8 @@ const About = () => {
           Creemos en la innovación y en el uso de tecnología avanzada para facilitar la gestión y el monitoreo en el ámbito de la salud.
         </p>
         <p>
-          Su objetivo es mejorar la comunicación médico-paciente mediante un sistema que permite a los doctores registrar enfermedades, proponer tratamientos y gestionar pacientes,
-          y a los pacientes acceder de forma clara y sencilla a su información médica.
+          El desarrollo ha sido realizado de forma individual, abarcando tanto el diseño como la implementación de la plataforma web y el videojuego educativo asociado. El proyecto combina conocimientos de desarrollo frontend y backend,
+           bases de datos y diseño centrado en el usuario, integrando también aspectos éticos y comunicativos del entorno médico.
         </p>
         <a href="/">Volver al Inicio</a>
       </div>
