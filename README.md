@@ -36,7 +36,7 @@ Abrimos terminal y ejecutamos: npm run dev
 cd ..
 cd proyectoGrado
 code .
-Abrimos terminal y ejecutamos: npm run start
+Abrimos terminal y ejecutamos: npm run dev
 ```
 ### 2. Acceder a la web
 
