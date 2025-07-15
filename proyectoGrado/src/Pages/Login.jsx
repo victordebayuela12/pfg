@@ -15,21 +15,6 @@ function Login() {
     setError("");
 
 
-    if (email === "medico@gmail.com" && password === "medico") {
-        const fakeToken = "offline-token";
-        const fakeUserId = "offline-user-id";
-        const fakeRole = "doctor";
-
-        localStorage.setItem("jwtToken", fakeToken);
-        localStorage.setItem("userId", fakeUserId);
-        localStorage.setItem("role", fakeRole);
-        localStorage.setItem("email", email);
-
-        console.log("🟢 Acceso local offline concedido");
-        navigate("/createPatient");
-        return;
-    }
-
 
     try {
         const response = await loginUser({ email, password });

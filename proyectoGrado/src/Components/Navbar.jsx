@@ -41,7 +41,7 @@ const Navbar = () => {
 
   let endpoint = role === "patient"
     ? `http://localhost:5000/api/patients/${userId}`
-    : `http://localhost:5000/api/users/${userId}`;
+    : `http://localhost:5000/api/users/doctors/${userId}`;
 
   try {
     await axios.delete(endpoint, {
