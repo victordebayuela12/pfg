@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "./EditTreatment.css";
-
+import { calcularIFSZ, interpretarIFSZ } from "../Utils/IFSZ";
 function EditTreatment() {
   const { id } = useParams();
   const token = localStorage.getItem("jwtToken");
@@ -217,30 +217,57 @@ function EditTreatment() {
             ➕ Añadir Descripción
           </button>
 
-          <div className="description-container">
-            {formData.descriptions.map((desc, index) =>
-              desc._markedForDeletion ? null : (
-                <div key={index} className="description-box">
-                  <p>{desc.descripcion}</p>
-                  {desc.image &&
-                    (typeof desc.image === "string" ? (
-                      <img src={desc.image} alt="Descripción" />
-                    ) : (
-                      <img
-                        src={URL.createObjectURL(desc.image)}
-                        alt="Nueva imagen"
-                      />
-                    ))}
-                  <button
-                    type="button" className="button-delete"
-                    onClick={() => handleRemoveDescription(index)}
-                  >
-                    X
-                  </button>
-                </div>
-              )
-            )}
-          </div>
+          {formData.descriptions.map((desc, index) => {
+                if (desc._markedForDeletion) return null;
+                const score = calcularIFSZ(desc.descripcion);
+                const { grado, color } = interpretarIFSZ(score);
+
+                return (
+                  <div key={index} className="description-box">
+                    <p>{desc.descripcion}</p>
+                    {desc.image &&
+                      (typeof desc.image === "string" ? (
+                        <img src={desc.image} alt="Descripción" />
+                      ) : (
+                        <img src={URL.createObjectURL(desc.image)} alt="Nueva imagen" />
+                      ))}
+                    <p>
+                      <strong>IFSZ:</strong>{" "}
+                      <span style={{ color, fontWeight: "bold" }}>
+                        {score.toFixed(2)} ({grado})
+                      </span>
+                    </p>
+                    <button
+                      type="button"
+                      className="button-delete"
+                      onClick={() => handleRemoveDescription(index)}
+                    >
+                      X
+                    </button>
+                  </div>
+                );
+              })}
+              {formData.descriptions.length > 0 && (() => {
+                const textoTotal = formData.descriptions
+                  .filter((d) => !d._markedForDeletion)
+                  .map((d) => d.descripcion)
+                  .join(" ");
+                if (!textoTotal.trim()) return null;
+                const scoreTotal = calcularIFSZ(textoTotal);
+                const { grado, color } = interpretarIFSZ(scoreTotal);
+
+                return (
+                  <div style={{ marginTop: "15px" }}>
+                    <h4>IFSZ total del tratamiento:</h4>
+                    <p>
+                      <span style={{ color, fontWeight: "bold" }}>
+                        {scoreTotal.toFixed(2)} ({grado})
+                      </span>
+                    </p>
+                  </div>
+                );
+              })()}
+
 
           <button type="submit" className="button-modern button-large">
             💾 Modificar Tratamiento

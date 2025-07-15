@@ -17,6 +17,8 @@ function CreatePatient() {
     const [showDiseaseModal, setShowDiseaseModal] = useState(false);
     const [showTreatmentModal, setShowTreatmentModal] = useState(false);
     const [selectedTreatmentDetails, setSelectedTreatmentDetails] = useState(null);
+    const [selectedDiseaseDetails, setSelectedDiseaseDetails] = useState(null);
+    const [showDiseasePreview, setShowDiseasePreview] = useState(false);
 
     useEffect(() => {
         fetchDiseases();
@@ -65,6 +67,18 @@ const handleSelectDisease = async (diseaseId) => {
     } catch (err) {
         console.error("❌ Error al obtener tratamientos:", err);
     }
+};
+const fetchApprovedDiseaseDetails = async (diseaseId) => {
+  try {
+    const token = localStorage.getItem("jwtToken");
+    const response = await axios.get(`http://localhost:5000/api/diseases/${diseaseId}/approved-version`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    setSelectedDiseaseDetails(response.data);
+    setShowDiseasePreview(true);
+  } catch (err) {
+    console.error("❌ Error al obtener versión aprobada:", err);
+  }
 };
 
     
@@ -185,6 +199,15 @@ return (
               }
             </p>
           )}
+{formData.selectedDisease && (
+  <button
+    type="button"
+    className="button-uniform"
+    onClick={() => fetchApprovedDiseaseDetails(formData.selectedDisease)}
+  >
+    Ver detalles de la enfermedad
+  </button>
+)}
 
           {formData.selectedDisease && (
             <button
@@ -292,31 +315,69 @@ return (
 
             {/* Modal de vista previa de tratamientos */}
             {selectedTreatmentDetails && (
+              <div className="modal-overlay">
+                <div className="preview-modal">
+                  <h2>{selectedTreatmentDetails.name}</h2>
+
+                  <div className="preview-section">
+                    <h4>📄 Descripciones</h4>
+                    {selectedTreatmentDetails.descriptions.map((desc, index) => (
+                      <div key={index} className="preview-card">
+                        <p>{desc.descripcion}</p>
+                        {desc.image && <img src={desc.image} alt="Descripción" />}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="preview-section">
+                    <h4>✅ Beneficios</h4>
+                    <p>{selectedTreatmentDetails.benefits}</p>
+                  </div>
+
+                  <div className="preview-section">
+                    <h4>⚠️ Riesgos</h4>
+                    <p>{selectedTreatmentDetails.risks}</p>
+                  </div>
+
+                  <button className="button-close" onClick={closePreviewModal}>
+                    Cerrar
+                  </button>
+                </div>
+              </div>
+)}          {showDiseasePreview && selectedDiseaseDetails && (
   <div className="modal-overlay">
     <div className="preview-modal">
-      <h2>{selectedTreatmentDetails.name}</h2>
+      <h2>🧬 {selectedDiseaseDetails.disease?.name || "Enfermedad"}</h2>
+
+      <div className="preview-section">
+        <h4>📋 Resumen</h4>
+        <p>{selectedDiseaseDetails.resume}</p>
+      </div>
 
       <div className="preview-section">
         <h4>📄 Descripciones</h4>
-        {selectedTreatmentDetails.descriptions.map((desc, index) => (
-          <div key={index} className="preview-card">
-            <p>{desc.descripcion}</p>
-            {desc.image && <img src={desc.image} alt="Descripción" />}
-          </div>
-        ))}
+        {selectedDiseaseDetails.descriptions.length > 0 ? (
+          selectedDiseaseDetails.descriptions.map((desc, index) => (
+            <div key={index} className="preview-card">
+              <p>{desc.descripcion}</p>
+              {desc.image && <img src={desc.image} alt={`Descripción ${index}`} />}
+            </div>
+          ))
+        ) : (
+          <p>No hay descripciones disponibles.</p>
+        )}
       </div>
 
       <div className="preview-section">
-        <h4>✅ Beneficios</h4>
-        <p>{selectedTreatmentDetails.benefits}</p>
+        <h4>🧪 Tratamientos vinculados</h4>
+        <ul>
+          {selectedDiseaseDetails.treatments.map((t) => (
+            <li key={t._id}>{t.name}</li>
+          ))}
+        </ul>
       </div>
 
-      <div className="preview-section">
-        <h4>⚠️ Riesgos</h4>
-        <p>{selectedTreatmentDetails.risks}</p>
-      </div>
-
-      <button className="button-close" onClick={closePreviewModal}>
+      <button className="button-close" onClick={() => setShowDiseasePreview(false)}>
         Cerrar
       </button>
     </div>

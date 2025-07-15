@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "./EditDisease.css"; // reutilizamos los estilos
+import { calcularIFSZ, interpretarIFSZ } from "../Utils/IFSZ";
 
 function EditRejectedDisease() {
     const { id } = useParams(); // ID de la versión rechazada
@@ -222,8 +223,11 @@ formDataToSend.append("descriptions", JSON.stringify(descriptionsToSend));
 </button>
 
 <div className="description-container">
-  {formData.descriptions.map((desc, index) =>
-    desc._markedForDeletion ? null : (
+  {formData.descriptions.map((desc, index) => {
+    const score = calcularIFSZ(desc.descripcion);
+    const { grado, color } = interpretarIFSZ(score);
+
+    return desc._markedForDeletion ? null : (
       <div key={index} className="description-box">
         <p style={{ marginBottom: '10px' }}>{desc.descripcion}</p>
         {desc.image && (
@@ -233,20 +237,44 @@ formDataToSend.append("descriptions", JSON.stringify(descriptionsToSend));
                 ? URL.createObjectURL(desc.image)
                 : desc.image
             }
-            alt="desc"
+            alt="Descripción"
           />
         )}
+        <p>
+          <strong>IFSZ:</strong>{" "}
+          <span style={{ color, fontWeight: "bold" }}>
+            {score.toFixed(2)} ({grado})
+          </span>
+        </p>
         <button
           type="button"
           className="button-delete"
           onClick={() => handleRemoveDescription(index)}
         >
-          🗑️
+          
         </button>
       </div>
-    )
-  )}
+    );
+  })}
+  {formData.descriptions.length > 0 && (() => {
+  const textoTotal = formData.descriptions.map((d) => d.descripcion).join(" ");
+  const scoreTotal = calcularIFSZ(textoTotal);
+  const { grado, color } = interpretarIFSZ(scoreTotal);
+
+  return (
+    <div style={{ marginTop: "15px" }}>
+      <h4>IFSZ total de la versión:</h4>
+      <p>
+        <span style={{ color, fontWeight: "bold" }}>
+          {scoreTotal.toFixed(2)} ({grado})
+        </span>
+      </p>
+    </div>
+  );
+})()}
+
 </div>
+
 
 
                     <button type="button" className="button-treatments" onClick={() => setShowModal(true)}>Seleccionar Tratamientos</button>
@@ -257,7 +285,7 @@ formDataToSend.append("descriptions", JSON.stringify(descriptionsToSend));
                             return t ? (
                                 <div key={id} className="treatment-selected">
                                     <p onClick={() => setSelectedTreatmentDetails(t)}>{t.name}</p>
-                                    <button onClick={() => handleSelectTreatment(id)}>×</button>
+                                    <button onClick={() => handleSelectTreatment(id)}></button>
                                 </div>
                             ) : null;
                         })}
@@ -304,16 +332,29 @@ formDataToSend.append("descriptions", JSON.stringify(descriptionsToSend));
                 </div>
             )}
 
-            {selectedTreatmentDetails && (
-                <div className="modal-overlay">
-                    <div className="modal">
-                        <h2>{selectedTreatmentDetails.name}</h2>
-                        <p><strong>Beneficios:</strong> {selectedTreatmentDetails.benefits}</p>
-                        <p><strong>Riesgos:</strong> {selectedTreatmentDetails.risks}</p>
-                        <button onClick={() => setSelectedTreatmentDetails(null)}>Cerrar</button>
-                    </div>
+           {selectedTreatmentDetails && (
+      <div className="modal-overlay">
+        <div className="modal">
+          <h2>{selectedTreatmentDetails.name}</h2>
+          <p><strong>Beneficios:</strong> {selectedTreatmentDetails.benefits}</p>
+          <p><strong>Riesgos:</strong> {selectedTreatmentDetails.risks}</p>
+          <h3>Descripciones</h3>
+          <div className="description-container">
+            {selectedTreatmentDetails.descriptions.length > 0 ? (
+              selectedTreatmentDetails.descriptions.map((desc, index) => (
+                <div key={index} className="description-box">
+                  <p>{desc.descripcion}</p>
+                  {desc.image && <img src={desc.image} alt={`Descripción ${index}`} />}
                 </div>
+              ))
+            ) : (
+              <p>No hay descripciones disponibles.</p>
             )}
+          </div>
+          <button className="button-close" onClick={closePreviewModal}>Cerrar</button>
+        </div>
+      </div>
+    )}
         </div>
     );
 }

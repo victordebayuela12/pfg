@@ -1,5 +1,5 @@
 export function contarSilabas(palabra) {
-  palabra = palabra.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // quitar tildes
+  palabra = palabra.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   const vocales = "aeiou";
   let contador = 0;
   let anteriorEsVocal = false;
@@ -15,7 +15,7 @@ export function contarSilabas(palabra) {
   return Math.max(1, contador);
 }
 
-export function calcularINFZ(texto) {
+export function calcularIFSZ(texto) {
   if (!texto || texto.trim().length === 0) return 0;
 
   const frases = texto.split(/[.!?¡¿;:]+/).filter(f => f.trim().length > 0);
@@ -30,4 +30,14 @@ export function calcularINFZ(texto) {
     206.835 - (62.3 * (numSilabas / numPalabras)) - (numPalabras / numFrases);
 
   return Math.round(indice * 100) / 100;
+}
+
+export function interpretarIFSZ(score) {
+  if (score >= 86) return { grado: "Muy fácil", color: "#90ee90" };
+  if (score >= 76) return { grado: "Fácil", color: "#008000" };
+  if (score >= 66) return { grado: "Bastante fácil", color: "#006400" };
+  if (score >= 51) return { grado: "Normal", color: "#ffff00" };
+  if (score >= 36) return { grado: "Bastante difícil", color: "#ff8c00" };
+  if (score >= 16) return { grado: "Árido", color: "#ff6347" };
+  return { grado: "Muy difícil", color: "#8b0000" };
 }
