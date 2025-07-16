@@ -3,7 +3,7 @@
 Este proyecto está dividido en dos partes:
 - `tfg`: backend en Node.js + Express + MongoDB
 - `proyectoGrado`: frontend en React
-Este proyecto incluye un archivo `.env` con valores reales de configuración por motivos académicos y de evaluación del TFG.
+- Este proyecto incluye un archivo `.env` con valores reales de configuración por motivos académicos y de evaluación del TFG.
 ###  Requisitos previos
 
 - Tener instalado Node.js y npm. https://nodejs.org/
