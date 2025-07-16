@@ -7,7 +7,6 @@ Este proyecto está dividido en dos partes:
 ###  Requisitos previos
 
 - Tener instalado Node.js y npm. https://nodejs.org/
-- Tener Visual Studio Code (opcional, pero recomendado)
 - (Opcional) Tener `code` habilitado desde la terminal
 
 ### 1. Clonar el repositorio
@@ -36,17 +35,17 @@ CLOUDINARY_API_SECRET=jaNF6N5LN17dwqDkYln8BECqu-4
 EMAIL_USER=tfgvictorserious@gmail.com
 EMAIL_PASS=mokr raaj geia cuqp
 ```
-Con la terminal abierta en el proyecto:
+Abre una terminal y ejecuta los siguientes comandos en dos terminales separadas (una para el backend y otra para el frontend):
 ```bash
+cd pfg
 
+# Terminal 1 - Backend
 cd tfg
-code .
-Abrimos terminal y ejecutamos: npm run dev
+npm run dev
 
-cd ..
+# Terminal 2 - Frontend
 cd proyectoGrado
-code .
-Abrimos terminal y ejecutamos: npm run dev
+npm run dev
 ```
 ### 2. Acceder a la web
 
