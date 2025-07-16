@@ -1,5 +1,15 @@
 ##  Cómo ejecutar el proyecto
 
+Este proyecto está dividido en dos partes:
+- `tfg`: backend en Node.js + Express + MongoDB
+- `proyectoGrado`: frontend en React
+Este proyecto incluye un archivo `.env` con valores reales de configuración por motivos académicos y de evaluación del TFG.
+###  Requisitos previos
+
+- Tener instalado Node.js y npm. https://nodejs.org/
+- Tener Visual Studio Code (opcional, pero recomendado)
+- (Opcional) Tener `code` habilitado desde la terminal
+
 ### 1. Clonar el repositorio
 
 Abre la terminal y escribe:
@@ -39,8 +49,10 @@ code .
 Abrimos terminal y ejecutamos: npm run dev
 ```
 ### 2. Acceder a la web
-No conectarse a una red pública.
+
 Accede a http://localhost:5173/
+⚠️ Nota: No funciona si estás conectado a una red pública que bloquee ciertos puertos.
+
 Accede con:
 - email: admin@example.com
 - password: admin
