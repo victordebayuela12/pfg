@@ -183,9 +183,7 @@ exports.getTreatmentsByStatus = async (req, res) => {
     try {
         let query = { status };
 
-        if (req.user_role !== 'admin') {
-            query.doctorCreador = req.user_id;
-        }
+       
 
         const treatments = await Treatment.find(query);
         res.json(treatments);
