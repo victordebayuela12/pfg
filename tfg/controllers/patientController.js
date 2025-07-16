@@ -7,54 +7,13 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer= require('nodemailer');
 const {sendPasswordEmail} = require('./authController');
-/*
-exports.getFullUserInfo = async (req, res) => {
-  try {
-    const userEmail = req.user_email;
-    console.log('User Email:', req.user_email);
-    
-    const patient = await Patient.findOne({ email: userEmail })
-      .populate('disease')
-      .populate('treatments');
 
-    if (!patient) {
-      return res.status(404).json({ message: 'Paciente no encontrado' });
-    }
-
-    const disease = await Disease.findById(patient.disease._id)
-      .populate({
-        path: 'version_aprobada',
-        populate: {
-          path: 'tratamientos'
-        }
-      });
-
-    const version = disease.version_aprobada;
-
-    res.json({
-      name: patient.name,
-      disease: disease.name,
-      resumen: version?.resumen,
-      descripciones: version?.descripciones || [],
-      tratamientos: patient.treatments.map(t => ({
-        name: t.name,
-        benefits: t.benefits,
-        risks: t.risks
-      }))
-    });
-
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Error del servidor' });
-  }
-};*/
 
 exports.getFullUserInfo = async (req, res) => {
   try {
     const userId = req.params.id;
     console.log("User ID recibido:", userId);
 
-    // Buscar al paciente y hacer populate de todo lo necesario en una sola consulta
     const patient = await Patient.findById(userId)
       .populate({
         path: "disease",
@@ -117,12 +76,11 @@ exports.getMyPatients = async (req, res) => {
   }
 };
 
-// Registrar un nuevo paciente (solo los doctores pueden hacerlo)
+
 exports.registerPatient = async (req, res) => {
     try {
         const { name, email, password, doctor, disease, treatments } = req.body;
 
-        // Función interna para validaciones
         const validatePatientData = async () => {
             const existingDoctor = await User.findOne({ _id: doctor, role: 'doctor', status: 'approved' });
             if (!existingDoctor) throw { status: 403, message: "Solo doctores aprobados pueden registrar pacientes." };
@@ -136,12 +94,10 @@ exports.registerPatient = async (req, res) => {
             }
         };
 
-        // Función interna para enviar correo con la contraseña
 
-        // Validar datos
         await validatePatientData();
 
-        // Crear paciente
+     
         const hashedPassword = await bcrypt.hash(password, 10);
         const newPatient = new Patient({
             name,
@@ -153,7 +109,6 @@ exports.registerPatient = async (req, res) => {
         });
         await newPatient.save();
 
-        // Enviar correo con contraseña
         await sendPasswordEmail(email,name,password);
 
         res.status(201).json({
@@ -204,7 +159,6 @@ exports.loginPatient = async (req, res) => {
   }
 };
 
-// Obtener todos los pacientes
 exports.getAllPatients = async (req, res) => {
     try {
         const patients = await Patient.find().populate('doctor', 'name1 surname1 email')
@@ -217,7 +171,6 @@ exports.getAllPatients = async (req, res) => {
     }
 };
 
-// Obtener un paciente por ID
 exports.getPatientById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -236,7 +189,7 @@ exports.getPatientById = async (req, res) => {
     }
 };
 
-// Eliminar un paciente
+
 exports.deletePatient = async (req, res) => {
     try {
         const { id } = req.params;

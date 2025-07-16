@@ -11,9 +11,9 @@ const TreatmentSchema = new mongoose.Schema({
     ],
     benefits: { type: String, required: true },
     risks: { type: String, required: true },
-    doctorCreador: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // 👈 Nuevo campo
+    doctorCreador: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, 
     status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
-    rejectionComment: { type: String, default:"" } // nuevo campo opcional
+    rejectionComment: { type: String, default:"" } 
 }, { timestamps: true });
 
 module.exports = mongoose.model('Treatment', TreatmentSchema);

@@ -1,6 +1,6 @@
 const Disease = require('../models/Disease');
 const DiseaseVersion = require('../models/DiseaseVersion');
-// ✅ Crear una nueva enfermedad (solo nombre)
+
 exports.createDisease = async (req, res) => {
   try {
     const { name } = req.body;
@@ -8,7 +8,7 @@ exports.createDisease = async (req, res) => {
       return res.status(400).json({ message: "El nombre es obligatorio." });
     }
 
-    // Evitar duplicados
+   
     const exists = await Disease.findOne({ name: name.trim() });
     if (exists) {
       return res.status(409).json({ message: "La enfermedad ya existe." });
@@ -23,12 +23,12 @@ exports.createDisease = async (req, res) => {
   }
 };
 
-// ✅ Obtener todas las enfermedades
+
 exports.getAllDiseases = async (req, res) => {
     try {
       const diseases = await Disease.find().populate({
         path: "version_aprobada",
-        strictPopulate: false // 🔧 evita que lance error si no existe
+        strictPopulate: false 
       });
   
       res.status(200).json(diseases);
@@ -42,7 +42,7 @@ exports.getAllDiseases = async (req, res) => {
   };
   
 
-// ✅ Obtener una enfermedad por ID
+
 exports.getDiseaseById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -56,7 +56,7 @@ exports.getDiseaseById = async (req, res) => {
   }
 };
 
-// ✅ Eliminar una enfermedad
+
 exports.deleteDisease = async (req, res) => {
   try {
     const { id } = req.params;
@@ -70,11 +70,10 @@ exports.deleteDisease = async (req, res) => {
   }
 };
 
-// ✅ Actualizar la versión aprobada de una enfermedad
 exports.updateApprovedVersion = async (req, res) => {
   try {
-    const { id } = req.params; // ID de Disease
-    const { versionId } = req.body; // ID de la nueva versión aprobada
+    const { id } = req.params; 
+    const { versionId } = req.body; 
 
     const disease = await Disease.findById(id);
     if (!disease) {

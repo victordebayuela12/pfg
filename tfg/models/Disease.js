@@ -5,7 +5,7 @@ const DiseaseSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    unique: true // para evitar duplicados
+    unique: true 
   },
   version_aprobada: {
     type: mongoose.Schema.Types.ObjectId,

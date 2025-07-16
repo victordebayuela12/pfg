@@ -8,15 +8,15 @@ const authenticateJWT = (req, res, next) => {
     }
     console.log("🔐 Token recibido:", authHeader);
 
-    const token = authHeader.split(' ')[1]; // Extraer el token
+    const token = authHeader.split(' ')[1]; 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             return res.status(403).json({ error: "Token inválido o expirado" });
         }
-        console.log("✅ Decoded token:", decoded);
+        console.log("Decoded token:", decoded);
 
-        req.user_id = decoded.id; // Guardamos el ID del usuario autenticado
-        req.user_role = decoded.role; // Opcional: Si necesitas el rol también
+        req.user_id = decoded.id; 
+        req.user_role = decoded.role; 
         req.user_email = decoded.email;
         next();
     });

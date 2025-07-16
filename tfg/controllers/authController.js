@@ -17,7 +17,7 @@ require('dotenv').config();
 
 exports.forgotPassword = async (req, res) => {
   const { email } = req.body;
-  console.log("🔍 Petición recibida para:", email); // <-- este log
+  console.log("🔍 Petición recibida para:", email); 
 
   let user = await User.findOne({ email });
   let model = 'User';
@@ -40,7 +40,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
 
 const resetUrl = `${FRONTEND_URL}/reset-password?token=${token}&type=${model.toLowerCase()}`;
 
-  console.log("🔗 Enlace de recuperación:", resetUrl); // <-- verificación útil
+  console.log("🔗 Enlace de recuperación:", resetUrl);
 
 
 
@@ -53,10 +53,10 @@ const resetUrl = `${FRONTEND_URL}/reset-password?token=${token}&type=${model.toL
 
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) {
-      console.error("❌ Error al enviar el correo:", err); // <-- muy importante
+      console.error(" Error al enviar el correo:", err); 
       return res.status(500).json({ message: 'Error al enviar el correo', error: err.message });
     }
-    console.log("📧 Correo enviado:", info.response);
+    console.log(" Correo enviado:", info.response);
     res.json({ message: 'Correo enviado correctamente' });
   });
 };
@@ -149,7 +149,6 @@ exports.loginUser = async (req, res) => {
       });
     }
 
-    // No encontrado en User, buscar en Patient
     console.log("No encontrado en User, buscando en Patient...");
     const patient = await Patient.findOne({ email });
     if (!patient) {
@@ -163,7 +162,7 @@ exports.loginUser = async (req, res) => {
       return res.status(401).json({ error: 'Contraseña incorrecta.' });
     }
 
-    // Firmar token como paciente
+  
     const token = jwt.sign({ id: patient._id, role: 'patient' }, process.env.JWT_SECRET, { expiresIn: '1d' });
     console.log("Login exitoso como paciente ✅");
 console.log("ID del paciente:", patient._id.toString());

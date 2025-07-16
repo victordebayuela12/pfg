@@ -5,17 +5,15 @@ const mongoose = require('mongoose');
 
 
 
-// 📌 Crear un nuevo tratamiento asociado a una enfermedad
-exports.createTreatment = async (req, res) => {
-    try { const { name, descriptions, benefits, risks } = req.body; const doctorId = req.user_id; // ⬅️ Obtenido del token (middleware)
 
-        // Validar doctor
+exports.createTreatment = async (req, res) => {
+    try { const { name, descriptions, benefits, risks } = req.body; const doctorId = req.user_id; 
+
         const doctor = await User.findById(doctorId);
         if (!doctor || doctor.role !== "doctor") {
             return res.status(403).json({ message: "Solo los doctores pueden crear tratamientos." });
         }
     
-        // Procesar descripciones con imágenes
         let processedDescriptions = [];
         if (descriptions && Array.isArray(descriptions)) {
             processedDescriptions = descriptions.map((desc, index) => {
@@ -33,7 +31,7 @@ exports.createTreatment = async (req, res) => {
             descriptions: processedDescriptions,
             benefits,
             risks,
-            doctorCreador: doctorId, // ✅ Nuevo campo
+            doctorCreador: doctorId, 
             status: "pending"
         });
     
@@ -50,17 +48,16 @@ exports.createTreatment = async (req, res) => {
 
 
 
-// 📌 Obtener un tratamiento por ID
 exports.getTreatmentById = async (req, res) => {
     try {
         const { id } = req.params;
 
-        // Validación de ID
+       
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ message: "ID de tratamiento no válida." });
         }
 
-        const treatment = await Treatment.findById(id); // 👈 sin populate
+        const treatment = await Treatment.findById(id); 
 
         if (!treatment) {
             return res.status(404).json({ message: "Tratamiento no encontrado." });
@@ -73,7 +70,6 @@ exports.getTreatmentById = async (req, res) => {
     }
 };
 
-// 📌 Modificar un tratamiento
 exports.updateTreatment = async (req, res) => {
   try {
     const { id } = req.params;
@@ -103,7 +99,7 @@ exports.updateTreatment = async (req, res) => {
         benefits,
         risks,
         descriptions: processedDescriptions,
-        status: "pending" // ✅ Fuerza revisión si se edita
+        status: "pending" 
       },
       { new: true }
     );
@@ -121,8 +117,6 @@ exports.updateTreatment = async (req, res) => {
 
 
 
-// 📌 Cambiar estado de un tratamiento (admin)
-// 📌 Cambiar estado de un tratamiento (admin)
 exports.updateTreatmentStatus = async (req, res) => {
     try {
         const { id } = req.params;
@@ -137,7 +131,7 @@ exports.updateTreatmentStatus = async (req, res) => {
         if (status === 'rejected') {
             updateFields.rejectionComment = comment || '';
         } else if (status === 'approved') {
-            updateFields.rejectionComment = ''; // Limpiar el comentario si se aprueba
+            updateFields.rejectionComment = ''; 
         }
 
         const treatment = await Treatment.findByIdAndUpdate(id, updateFields, { new: true });
@@ -153,7 +147,6 @@ exports.updateTreatmentStatus = async (req, res) => {
 };
 
 
-// 📌 Eliminar un tratamiento
 exports.deleteTreatment = async (req, res) => {
     try {
         const { id } = req.params;
@@ -190,7 +183,6 @@ exports.getTreatmentsByStatus = async (req, res) => {
     try {
         let query = { status };
 
-        // Si el usuario no es admin, filtramos por doctor
         if (req.user_role !== 'admin') {
             query.doctorCreador = req.user_id;
         }

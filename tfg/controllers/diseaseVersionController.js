@@ -3,7 +3,7 @@ const Disease = require('../models/Disease');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
-// 📌 Crear una nueva versión de enfermedad
+
 exports.createDiseaseVersion = async (req, res) => {
   try {
     const { diseaseId, resume, descriptions, treatments } = req.body;
@@ -23,7 +23,6 @@ exports.createDiseaseVersion = async (req, res) => {
       return res.status(403).json({ message: "Solo los doctores pueden crear versiones de enfermedades." });
     }
 
-    // Procesar imágenes si hay archivos
     const processedDescriptions = descriptions.map((desc, index) => {
       let imageUrl = null;
       if (req.files && Array.isArray(req.files)) {
@@ -53,7 +52,6 @@ exports.createDiseaseVersion = async (req, res) => {
   }
 };
 
-// 📌 Obtener versiones de una enfermedad
 exports.getDiseaseVersions = async (req, res) => {
   try {
     const { disease_id } = req.params;
@@ -68,7 +66,6 @@ exports.getDiseaseVersions = async (req, res) => {
   }
 };
 
-// 📌 Obtener una versión específica
 exports.getDiseaseVersionById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -88,7 +85,7 @@ exports.getDiseaseVersionById = async (req, res) => {
   }
 };
 
-// 📌 Obtener tratamientos de la versión aprobada
+
 exports.getTreatmentsByDisease = async (req, res) => {
   try {
     const { disease_id } = req.params;
@@ -108,7 +105,7 @@ exports.getTreatmentsByDisease = async (req, res) => {
   }
 };
 
-// 📌 Obtener versiones por estado
+
 exports.getDiseaseVersionsByStatus = async (req, res) => {
   try {
     const { status } = req.params;
@@ -128,36 +125,6 @@ exports.getDiseaseVersionsByStatus = async (req, res) => {
   }
 };
 
-
-// 📌 Aprobar o rechazar una versión
-/*exports.changeDiseaseVersionStatus = async (req, res) => {
-  try {
-    const { id, status } = req.params;
-    const validStatuses = ['approved', 'rejected'];
-
-    if (!validStatuses.includes(status)) {
-      return res.status(400).json({ message: "Estado no válido" });
-    }
-
-    const version = await DiseaseVersion.findById(id);
-    if (!version) {
-      return res.status(404).json({ message: "Versión no encontrada" });
-    }
-
-    version.status = status;
-    await version.save();
-    if (status === 'approved') {
-      await Disease.findByIdAndUpdate(version.disease, {
-        version_aprobada: version._id,
-      });
-    }
-
-    res.status(200).json({ message: `Versión marcada como ${status}`, version });
-  } catch (error) {
-    res.status(500).json({ message: "Error al cambiar el estado" });
-  }
-};*/
-// 📌 Aprobar o rechazar una versión con comentario
 exports.changeDiseaseVersionStatus = async (req, res) => {
   try {
     const { id, status } = req.params;
@@ -178,7 +145,7 @@ exports.changeDiseaseVersionStatus = async (req, res) => {
     if (status === 'rejected') {
       version.rejectionComment = rejectionComment || "";
     } else {
-      version.rejectionComment = ""; // Limpiar comentario si antes fue rechazada
+      version.rejectionComment = ""; 
       await Disease.findByIdAndUpdate(version.disease, {
         version_aprobada: version._id,
       });
@@ -193,7 +160,6 @@ exports.changeDiseaseVersionStatus = async (req, res) => {
 };
 
 
-// 📌 Eliminar versión rechazada
 exports.deleteDiseaseVersion = async (req, res) => {
   try {
     const { id } = req.params;
@@ -214,7 +180,6 @@ exports.deleteDiseaseVersion = async (req, res) => {
   }
 };
 
-// 📌 Obtener versiones por doctor y estado
 exports.getVersionsByDoctorAndStatus = async (req, res) => {
   try {
     const { doctorId, status } = req.params;
@@ -242,7 +207,6 @@ exports.updateDiseaseVersion = async (req, res) => {
         const { id } = req.params;
         const updates = req.body;
 
-        // Forzar que pase a 'pending' si se modifica una versión rechazada
         updates.status = 'pending';
 
         const updatedVersion = await DiseaseVersion.findByIdAndUpdate(id, updates, {
@@ -260,7 +224,7 @@ exports.updateDiseaseVersion = async (req, res) => {
         res.status(500).json({ message: 'Error al actualizar la versión de enfermedad' });
     }
 };
-// Editar una DiseaseVersion (si está rechazada y es el doctor creador)
+
 exports.editRejectedDiseaseVersion = async (req, res) => {
   try {
     const versionId = req.params.id;
@@ -279,10 +243,9 @@ exports.editRejectedDiseaseVersion = async (req, res) => {
       return res.status(403).json({ message: "No tienes permiso para editar esta versión" });
     }
 
-    // ✅ Actualizar resumen
+
     version.resume = req.body.resume || version.resume;
 
-    // ✅ Parsear descripciones desde JSON stringificado
     const rawDescriptions = JSON.parse(req.body.descriptions || '[]');
 
     const processedDescriptions = rawDescriptions.map((desc, index) => {
@@ -296,8 +259,7 @@ exports.editRejectedDiseaseVersion = async (req, res) => {
 
     version.descriptions = processedDescriptions;
 
-    // ✅ Reconstruir tratamientos
-    // ✅ Reconstruir tratamientos en orden
+
 const treatmentEntries = Object.keys(req.body)
   .filter(key => key.startsWith('treatments['))
   .map(key => {
