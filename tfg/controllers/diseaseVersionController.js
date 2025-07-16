@@ -144,12 +144,26 @@ exports.changeDiseaseVersionStatus = async (req, res) => {
 
     if (status === 'rejected') {
       version.rejectionComment = rejectionComment || "";
-    } else {
-      version.rejectionComment = ""; 
-      await Disease.findByIdAndUpdate(version.disease, {
-        version_aprobada: version._id,
-      });
+    } else { version.rejectionComment = "";
+
+
+  await Disease.findByIdAndUpdate(version.disease, {
+    version_aprobada: version._id,
+  });
+
+
+  await DiseaseVersion.updateMany(
+    {
+      disease: version.disease,
+      _id: { $ne: version._id },     
+      status: 'approved'            
+    },
+    {
+      status: 'rejected',
+      rejectionComment: 'Reemplazada por una versión más reciente.'
     }
+  );
+}
 
     await version.save();
 

@@ -86,8 +86,15 @@ function DiseaseDetails() {
                 ))}
               </div>
             </div>
+            
           ))}
         </div>
+        {diseaseVersion.status === 'rejected' && diseaseVersion.rejectionComment && (
+  <p className="rejection-comment">
+    <strong>Motivo del rechazo:</strong> {diseaseVersion.rejectionComment}
+  </p>
+)}
+
 
         {role === 'admin' && diseaseVersion.status === 'pending' && (
           <div className="button-group-centered">
