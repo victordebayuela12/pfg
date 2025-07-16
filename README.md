@@ -39,7 +39,7 @@ code .
 Abrimos terminal y ejecutamos: npm run dev
 ```
 ### 2. Acceder a la web
-
+No conectarse a una red pública.
 Accede a http://localhost:5173/
 Accede con:
 - email: admin@example.com
