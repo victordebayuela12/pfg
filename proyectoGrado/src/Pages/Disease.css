@@ -1,4 +1,4 @@
-/* General container */
+
 .disease-details-container {
   display: flex;
   justify-content: center;
@@ -9,7 +9,7 @@
   box-sizing: border-box;
 }
 
-/* Main box */
+
 .disease-details-box {
   background: white;
   padding: 50px 60px;
@@ -41,14 +41,13 @@
   text-align: center;
 }
 
-/* Títulos de secciones (Descripciones, Tratamientos...) */
 .section-title {
   font-size: 1.8rem;
   color: #0077b6;
   margin: 40px 0 20px;
   border-bottom: 2px solid #caf0f8;
   padding-bottom: 8px;
-  text-align: center; /* 👈 CENTRADO */
+  text-align: center; 
 }
 
 .disease-resume {
@@ -60,7 +59,7 @@
   color: #444;
 }
 
-/* Resume box */
+
 .resume-box {
   background: #f1f9ff;
   border-left: 4px solid #00b4d8;
@@ -72,14 +71,14 @@
   overflow-wrap: break-word;
 }
 
-/* Grid for descriptions and treatments */
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
 }
 
-/* Individual card */
+
 
 .card {
   background-color: #f9f9f9;
@@ -113,7 +112,6 @@
 }
 
 
-/* Treatment block */
 .treatment-card {
   background: #eaf4fb;
   border-left: 5px solid #0096c7;
@@ -122,14 +120,14 @@
   margin-bottom: 25px;
 }
 
-/* Subtítulo dentro de tarjetas si usas <h4> */
+
 .treatment-card h4 {
-  text-align: center; /* 👈 CENTRADO */
+  text-align: center; 
   color: #023e8a;
   margin-bottom: 10px;
 }
 
-/* Buttons */
+
 .button-group-centered {
   display: flex;
   justify-content: center;
@@ -165,7 +163,7 @@
   background-color: #a8001a;
 }
 
-/* Messages */
+
 .error-message {
   color: #d90429;
   font-weight: bold;

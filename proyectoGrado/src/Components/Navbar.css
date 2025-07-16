@@ -1,4 +1,4 @@
-/* Icono fijo */
+
 .navbar-icon {
   position: fixed;
   top: 20px;
@@ -19,7 +19,7 @@
   to { transform: rotate(360deg); }
 }
 
-/* Slide-in de barra */
+
 .navbar {
   padding-top: 150px;
   position: fixed;
@@ -37,7 +37,7 @@
   transform: translateX(0);
 }
 
-/* Lista de enlaces */
+
 .navbar ul {
   list-style: none;
   padding: 0;
@@ -52,7 +52,7 @@
   text-align: center;
 }
 
-/* Enlaces */
+
 .navbar li a {
   display: block;
   text-align: center;
@@ -78,7 +78,7 @@
   background-color: #5ab9d6;
 }
 
-/* Cerrar sesión */
+
 .navbar li .logout-button {
   display: block;
   padding: 15px 40px;

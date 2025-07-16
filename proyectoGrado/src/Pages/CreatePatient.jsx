@@ -47,7 +47,6 @@ const fetchDiseases = async () => {
     }
 };
 
-// ✅ handleSelectDisease modificado para usar treatments directamente
 const handleSelectDisease = async (diseaseId) => {
     setFormData(prev => ({
         ...prev,
@@ -82,8 +81,6 @@ const fetchApprovedDiseaseDetails = async (diseaseId) => {
 };
 
     
-
-    // Manejar búsqueda de tratamientos
     const handleSearch = (e) => {
         const query = e.target.value.toLowerCase();
         setSearchQuery(query);
@@ -94,7 +91,6 @@ const fetchApprovedDiseaseDetails = async (diseaseId) => {
         );
     };
 
-    // Manejar selección/deselección de tratamientos
     const handleSelectTreatment = (treatmentId) => {
         setFormData(prev => {
             const isSelected = prev.selectedTreatments.includes(treatmentId);
@@ -107,7 +103,6 @@ const fetchApprovedDiseaseDetails = async (diseaseId) => {
         });
     };
 
-    // Manejar vista previa del tratamiento
     const handlePreviewTreatment = (treatmentId) => {
         const treatment = allTreatments.find(t => t._id === treatmentId);
         if (treatment) {
@@ -119,7 +114,7 @@ const fetchApprovedDiseaseDetails = async (diseaseId) => {
         setSelectedTreatmentDetails(null);
     };
 
-    // Enviar formulario
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 

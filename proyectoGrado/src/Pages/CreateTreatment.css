@@ -1,4 +1,4 @@
-/* 📦 Contenedor general */
+
 .create-treatment-container {
   display: flex;
   justify-content: center;
@@ -9,7 +9,6 @@
   box-sizing: border-box;
 }
 
-/* 🧾 Caja blanca del formulario */
 .create-treatment-box {
   background: white;
   padding: 50px 60px;
@@ -21,13 +20,13 @@
    text-align: center;
 }
 .create-treatment-box h1 {
-  font-size: 2.8rem; /* Tamaño destacado */
+  font-size: 2.8rem;
   margin-bottom: 20px;
-  color: #005f73; /* Azul profesional */
-  font-weight: 700; /* Hace que destaque */
+  color: #005f73; 
+  font-weight: 700; 
 }
 
-/* 📝 Formulario */
+
 .treatment-form {
   display: flex;
   flex-direction: column;
@@ -40,7 +39,6 @@
   margin-bottom: 10px;
 }
 
-/* 🧷 Inputs y textareas */
 .treatment-form input,
 .treatment-form textarea {
   width: 100%;
@@ -59,7 +57,6 @@
   outline: none;
 }
 
-/* 📎 Selector de archivos */
 .input-file {
   font-size: 0.9rem;
   padding: 6px;
@@ -84,7 +81,6 @@
   background-color: #003f4f;
 }
 
-/* 🟢 Mensajes */
 .error-message {
   color: #d32f2f;
   background-color: #fdecea;
@@ -101,7 +97,6 @@
   text-align: center;
 }
 
-/* 🔘 Botones generales */
 .button-modern,
 .button-large,
 .button-add-description {
@@ -130,7 +125,6 @@
   margin-top: 25px;
 }
 
-/* 📄 Caja de descripciones */
 .description-container {
   display: flex;
   flex-direction: column;

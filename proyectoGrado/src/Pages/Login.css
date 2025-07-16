@@ -1,4 +1,4 @@
-/* Estilos generales */
+
 body {
   font-family: 'Poppins', sans-serif;
   background-color:transparent;
@@ -6,23 +6,22 @@ body {
   padding: 0;
 }
 
-/* Contenedor principal */
 .login-container {
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  height: 100vh; /* Ocupa toda la pantalla */
+  justify-content: center; 
+  align-items: center;
+  height: 100vh; 
   padding: 20px;
   box-sizing: border-box;
 
 }
 
-/* Caja principal */
+
 .login-box {
   background: white;
   padding: 70px 70px;
   border-radius: 15px;
-  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1); 
   width: 100%;
   max-width: 750px;
   text-align: center;
@@ -31,22 +30,22 @@ body {
 
 .login-title {
   font-size: 2.2rem;
-  color: #005f73; /* Azul profesional */
+  color: #005f73; 
   margin-bottom: 15px;
 }
 
 .login-description {
   font-size: 1.1rem;
-  color: #4f4f4f; /* Gris oscuro */
+  color: #4f4f4f; 
   margin-bottom: 30px;
   line-height: 1.6;
 }
 
-/* Formulario */
+
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Espaciado entre campos */
+  gap: 20px; 
 }
 
 .form-input {
@@ -61,16 +60,16 @@ body {
 
 .form-input:focus {
   outline: none;
-  border-color: #005f73; /* Azul profesional */
+  border-color: #005f73; 
 }
 
-/* Botón */
+
 .form-button {
   width: 100%;
   padding: 15px;
   font-size: 1.2rem;
   font-weight: bold;
-  background-color: #005f73; /* Azul fuerte */
+  background-color: #005f73;
   color: white;
   border: none;
   border-radius: 8px;
@@ -79,11 +78,11 @@ body {
 }
 
 .form-button:hover {
-  background-color: #003f4f; /* Azul más oscuro */
-  transform: translateY(-3px); /* Efecto hover */
+  background-color: #003f4f; 
+  transform: translateY(-3px); 
 }
 
-/* Mensaje de error */
+
 .error-message {
   color: red;
   font-size: 1rem;
@@ -92,7 +91,7 @@ body {
 }
 
 
-/* Pie de formulario */
+
 .form-footer {
   font-size: 0.9rem;
   color: #555;
@@ -112,6 +111,6 @@ body {
 }
 
 .login-box:hover {
-  transform: translateY(-5px); /* Igual que en about-box */
+  transform: translateY(-5px); 
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import "./SeriousGame.css"; // 👈 Importa el CSS
+import "./SeriousGame.css"; 
 
 const SeriousGame = () => {
   const unityContainerRef = useRef();
@@ -20,7 +20,7 @@ const SeriousGame = () => {
             productName: "MiJuego",
             productVersion: "1.0",
              width: 2000,
-    height: Math.floor(1100 * 9 / 16),  // para mantener 16:9, aprox 618px
+    height: Math.floor(1100 * 9 / 16),  
     devicePixelRatio: 1 
           })
           .then((instance) => {

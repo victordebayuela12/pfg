@@ -1,13 +1,13 @@
-/* Estilos generales */
+
 body {
   font-family: 'Poppins', sans-serif;
   background-color: transparent;
   margin: 0;
   padding: 0;
-  font-size: 18px; /* Tamaño base aumentado */
+  font-size: 18px; 
 }
 
-/* Contenedor principal */
+
 .admin-container {
   display: flex;
   justify-content: center;
@@ -28,7 +28,7 @@ body {
   text-align: center;
 }
 
-/* Caja principal */
+
 .admin-box {
   background: white;
   padding: 70px 80px;
@@ -53,7 +53,6 @@ body {
   line-height: 1.6;
 }
 
-/* Tabla */
 .modern-table {
   width: 100%;
   border-collapse: collapse;
@@ -76,7 +75,6 @@ body {
  
 }
 
-/* Anchos personalizados */
 .modern-table th.nombre,
 .modern-table td.nombre {
   width: 180px;
@@ -87,8 +85,8 @@ body {
 .modern-table td.riesgos {
   width: 250px;
   max-width: 250px;
-  white-space: normal;       /* permite saltos de línea */
-  overflow-wrap: break-word; /* fuerza corte de palabra si es larga */
+  white-space: normal;      
+  overflow-wrap: break-word; 
   word-break: break-word;
 }
 
@@ -103,26 +101,22 @@ body {
 }
 
 
-/* Encabezado tabla */
 .modern-table th {
   background-color: #005f73;
   color: white;
   font-weight: bold;
 }
 
-/* Hover fila */
 .modern-table tbody tr:hover {
   background-color: #f1f1f1;
 }
 
-/* Columna de acciones */
 .actions-column {
   display: flex;
   gap: 12px;
   justify-content: flex-start;
 }
 
-/* Botones de acción */
 .action-button {
   border: none;
   padding: 10px 16px;
@@ -148,7 +142,6 @@ body {
   background-color: #d32f2f;
 }
 
-/* Mensajes */
 .success-message {
   color: #4caf50;
   font-size: 1.1rem;
@@ -160,7 +153,7 @@ body {
   margin-top: 20px;
 }
 
-/* Imagen en descripciones */
+
 .description-image {
   width: 240px;
   height: auto;
@@ -169,7 +162,7 @@ body {
   margin-top: 10px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
-/* Botón Ver más en tabla */
+
 .ver-mas-icono {
   background: none;
   border: none;
@@ -189,7 +182,7 @@ body {
   text-decoration: none;
 }
 
-/* Estilos modal */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -243,7 +236,7 @@ body {
   background-color: #005f73;
 }
 .action-button {
-  width: 120px; /* o el valor que prefieras */
+  width: 120px; 
   text-align: center;
   padding: 10px 16px;
   font-size: 0.95rem;

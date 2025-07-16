@@ -1,8 +1,4 @@
-/* =============================
-   🌐 Admin Dashboard Stylesheet
-   ============================= */
 
-/* Fuente y ajustes base */
 body {
   font-family: 'Poppins', sans-serif;
   background-color: transparent;
@@ -11,7 +7,7 @@ body {
   font-size: 18px;
 }
 
-/* Contenedor principal */
+
 .admin-container {
   display: flex;
   justify-content: center;
@@ -21,7 +17,7 @@ body {
   box-sizing: border-box;
 }
 
-/* Caja visual centrada */
+
 .admin-box {
   background: white;
   padding: 70px 80px;
@@ -33,7 +29,7 @@ body {
   text-align: center;
 }
 
-/* Titulares */
+
 .admin-box h1 {
   font-size: 2.8rem;
   color: #005f73;
@@ -47,7 +43,7 @@ body {
   line-height: 1.6;
 }
 
-/* Sección de listas de doctores */
+
 .admin-list {
   margin-bottom: 50px;
   padding-bottom: 30px;
@@ -61,7 +57,7 @@ body {
   text-align: center;
 }
 
-/* Tabla de estilo moderno */
+
 .modern-table {
   width: 100%;
   border-collapse: collapse;
@@ -106,7 +102,7 @@ body {
   margin: 0;
 }
 
-/* Mensajes */
+
 .error-message {
   color: #f44336;
   font-size: 1.1rem;
@@ -124,7 +120,7 @@ body {
   color: #888;
 }
 
-/* Estilos de enlaces */
+
 a.disease-link {
   color: #005f73;
   text-decoration: none;
@@ -141,7 +137,7 @@ a.disease-link:hover {
   cursor: pointer;
 }
 
-/* Tooltip */
+
 .tooltip-container {
   position: relative;
   display: inline-block;
@@ -198,7 +194,7 @@ a.disease-link:hover {
   bottom: 110%;
 }
 
-/* Botones y estilos interactivos */
+
 .ver-mas-btn {
   margin-left: 8px;
   font-size: 0.9rem;
@@ -229,7 +225,7 @@ a.disease-link:hover {
   background-color: #b2ebf2;
 }
 
-/* Modal */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -283,7 +279,7 @@ a.disease-link:hover {
   background-color: #005f73;
 }
 
-/* Botones de acción */
+
 .action-button {
   width: 120px;
   text-align: center;

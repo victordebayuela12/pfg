@@ -8,7 +8,7 @@ function Home() {
 
   useEffect(() => {
     const token = localStorage.getItem('jwtToken');
-    const role = localStorage.getItem('role'); // Asegúrate de guardar esto al hacer login
+    const role = localStorage.getItem('role'); 
 
     if (token && role) {
       if (role === 'doctor') {

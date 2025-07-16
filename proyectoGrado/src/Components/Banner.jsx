@@ -1,6 +1,6 @@
 import React from 'react';
-import './Banner.css'; // Archivo de estilos para el banner
-import bannerImage from '../resources/banner.webp'; // Ruta a la imagen del banner
+import './Banner.css';
+import bannerImage from '../resources/banner.webp'; 
 
 function Banner() {
   return (

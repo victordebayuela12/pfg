@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import "./EditDisease.css"; // reutilizamos los estilos
+import "./EditDisease.css";
 import { calcularIFSZ, interpretarIFSZ } from "../Utils/IFSZ";
 
 function EditRejectedDisease() {
-    const { id } = useParams(); // ID de la versión rechazada
+    const { id } = useParams();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -23,7 +23,7 @@ function EditRejectedDisease() {
     const [showModal, setShowModal] = useState(false);
     const [selectedTreatmentDetails, setSelectedTreatmentDetails] = useState(null);
 
-    // Cargar tratamientos
+   
     const fetchTreatments = async () => {
         const token = localStorage.getItem("jwtToken");
         const headers = { Authorization: `Bearer ${token}` };
@@ -46,7 +46,7 @@ function EditRejectedDisease() {
             const { width, height } = img;
 
             if (width <= maxWidth && height <= maxHeight) {
-                return resolve(file); // No redimensionar si es pequeña
+                return resolve(file); 
             }
 
             const scale = Math.min(maxWidth / width, maxHeight / height);
@@ -62,14 +62,14 @@ function EditRejectedDisease() {
 
             canvas.toBlob((blob) => {
                 resolve(new File([blob], file.name, { type: 'image/jpeg' }));
-            }, 'image/jpeg', 0.8); // calidad 80%
+            }, 'image/jpeg', 0.8); 
             };
 
             reader.readAsDataURL(file);
         });
         };
 
-    // Cargar datos de la versión rechazada
+   
     const fetchVersion = async () => {
         try {
             const token = localStorage.getItem("jwtToken");
@@ -82,7 +82,7 @@ function EditRejectedDisease() {
                 resume: data.resume,
                 descriptions: data.descriptions.map(d => ({
                 descripcion: d.descripcion,
-                image: d.image || null // ← guardar la URL si existe
+                image: d.image || null 
                 })),
 
                 selectedTreatments: data.treatments.map(t => t._id),
@@ -136,12 +136,12 @@ const handleSubmit = async (e) => {
     const formDataToSend = new FormData();
     formDataToSend.append("resume", formData.resume);
 
-    // 🟢 Añadir tratamientos
+   
 
       formDataToSend.append("treatments", JSON.stringify(formData.selectedTreatments));
 
 
-    // 🟢 Añadir descripciones
+    
    const descriptionsToSend = [];
 
 for (let i = 0; i < formData.descriptions.length; i++) {
@@ -151,9 +151,9 @@ for (let i = 0; i < formData.descriptions.length; i++) {
   if (desc.image instanceof File) {
     const resizedImage = await resizeImage(desc.image);
     formDataToSend.append(`description-${i}`, resizedImage);
-    entry.image = `__upload__`; // marcador para que el backend use el archivo
+    entry.image = `__upload__`; 
   } else if (typeof desc.image === 'string') {
-    entry.image = desc.image; // imagen vieja
+    entry.image = desc.image; 
   }
 
   descriptionsToSend.push(entry);

@@ -95,8 +95,8 @@ function App() {
           <Route path="/adminDisease" element={<PrivateRoute role="admin"><DiseasesDashboard /></PrivateRoute>} />
           <Route path="/treatmentsDash" element={<PrivateRoute role="admin"><TreatmentsDashboard /></PrivateRoute>} />
 
-          {/* catch-all opcional */}
-          {/* <Route path="*" element={<Navigate to="/" />} /> */}
+        
+        
         </Routes>
       </div>
     </div>

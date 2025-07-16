@@ -1,4 +1,4 @@
-/* Estilos generales */
+
 body {
   font-family: 'Poppins', sans-serif;
   background-color:transparent;
@@ -6,7 +6,7 @@ body {
   padding: 0;
 }
 
-/* Contenedor principal */
+
 .register-container {
   display: flex;
   justify-content: center;
@@ -16,12 +16,11 @@ body {
   box-sizing: border-box;
 }
 
-/* Caja principal */
 .register-box {
   background: white;
   padding: 50px 60px;
   border-radius: 15px;
-  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1); 
   width: 100%;
   max-width: 500px;
   text-align: center;
@@ -29,22 +28,21 @@ body {
 
 .register-title {
   font-size: 2.2rem;
-  color: #005f73; /* Azul profesional */
+  color: #005f73; 
   margin-bottom: 15px;
 }
 
 .register-description {
   font-size: 1.1rem;
-  color: #4f4f4f; /* Gris oscuro */
+  color: #4f4f4f; 
   margin-bottom: 30px;
   line-height: 1.6;
 }
 
-/* Formulario */
 .register-form {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Espaciado entre campos */
+  gap: 20px; 
 }
 
 .form-input, .form-select {
@@ -59,7 +57,7 @@ body {
 
 .form-input:focus, .form-select:focus {
   outline: none;
-  border-color: #005f73; /* Azul profesional */
+  border-color: #005f73; 
 }
 
 .form-select {
@@ -73,13 +71,13 @@ body {
   cursor: pointer;
 }
 
-/* Botón */
+
 .form-button {
   width: 100%;
   padding: 15px;
   font-size: 1.2rem;
   font-weight: bold;
-  background-color: #005f73; /* Azul fuerte */
+  background-color: #005f73;
   color: white;
   border: none;
   border-radius: 8px;
@@ -88,24 +86,24 @@ body {
 }
 
 .form-button:hover {
-  background-color: #003f4f; /* Azul más oscuro */
-  transform: translateY(-3px); /* Efecto hover */
+  background-color: #003f4f; 
+  transform: translateY(-3px); 
 }
 
-/* Mensajes */
+
 .success-message {
-  color: #4caf50; /* Verde */
+  color: #4caf50; 
   font-size: 1rem;
   margin-top: 10px;
 }
 
 .error-message {
-  color: #e74c3c; /* Rojo */
+  color: #e74c3c; 
   font-size: 1rem;
   margin-top: 10px;
 }
 
-/* Pie de formulario */
+
 .form-footer {
   font-size: 0.9rem;
   color: #555;

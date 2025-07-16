@@ -23,7 +23,7 @@
   text-align: center;
 }
 
-/* Tabla moderna */
+
 .modern-table {
   width: 100%;
   border-collapse: collapse;
@@ -47,14 +47,14 @@
   background-color: #f5f5f5;
 }
 
-/* Celdas */
+
 .table-cell {
   margin: 0;
   line-height: 1.5;
   word-break: break-word;
 }
 
-/* Enlaces */
+
 .disease-link {
   color: #00788a;
   font-weight: 500;
@@ -64,14 +64,12 @@
   text-decoration: underline;
 }
 
-/* Tratamientos */
 .description-preview {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-/* Estados */
 .error-message {
   color: #d32f2f;
   background-color: #fdecea;
@@ -86,7 +84,7 @@
   color: #444;
   margin-top: 20px;
 }
-/* Nombre (columna 1): un poco más estrecha */
+
 .modern-table td:nth-child(1),
 .modern-table th:nth-child(1) {
   width: 18%;
@@ -96,7 +94,7 @@
   text-overflow: ellipsis;
 }
 
-/* Email (columna 2): más ancha y adaptable */
+
 .modern-table td:nth-child(2),
 .modern-table th:nth-child(2) {
   width: 32%;

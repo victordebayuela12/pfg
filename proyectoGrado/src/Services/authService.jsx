@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:5000/';
 
-// Función para registrar un usuario
+
 export const registerUser = async (userData) => {
     try {
         const response = await axios.post(`${API_URL}api/users/register`, userData);
@@ -14,13 +14,13 @@ export const registerUser = async (userData) => {
     }
 };
 
-// Función para iniciar sesión y obtener el token
+
 export const loginUser = async (credentials) => {
     try {
         const response = await axios.post(`${API_URL}auth/login`, credentials);
         const { token } = response.data;
         console.log(credentials)
-        // Guardar el token en localStorage (o sessionStorage si prefieres)
+
         localStorage.setItem('token', token);
     
         return response.data;
@@ -30,7 +30,7 @@ export const loginUser = async (credentials) => {
     }
 };
 
-// Configurar un cliente Axios con el token
+
 const getAuthHeaders = () => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -41,7 +41,6 @@ const getAuthHeaders = () => {
     };
 };
 
-// Función para obtener datos protegidos (ejemplo)
 export const getProtectedData = async (endpoint) => {
     try {
         const response = await axios.get(`${API_URL}/${endpoint}`, {
@@ -53,17 +52,3 @@ export const getProtectedData = async (endpoint) => {
         throw error.response?.data || { error: 'Error desconocido.' };
     }
 };
-
-/*// Función para crear un paciente (ejemplo de solicitud autenticada)
-export const createPatient = async (patientData) => {
-    try {
-        const response = await axios.post(`${API_URL}/patient`, patientData, {
-            headers: getAuthHeaders(),
-        });
-        return response.data;
-    } catch (error) {
-        console.error('Error al crear paciente:', error.response?.data || error.message);
-        throw error.response?.data || { error: 'Error desconocido.' };
-    }
-};
-*/

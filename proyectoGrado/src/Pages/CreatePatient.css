@@ -1,4 +1,4 @@
-/* Contenedor principal */
+
 .create-patient-container {
   display: flex;
   justify-content: center;
@@ -9,7 +9,6 @@
   box-sizing: border-box;
 }
 
-/* Caja del formulario */
 .create-patient-box {
   background: white;
   padding: 40px;
@@ -20,21 +19,20 @@
   box-sizing: border-box;
 }
 
-/* Título */
 .create-patient-box h1 {
-  font-size: 2.8rem; /* Tamaño destacado */
+  font-size: 2.8rem; 
   margin-bottom: 20px;
-  color: #005f73; /* Azul profesional */
-  font-weight: 700; /* Hace que destaque */
+  color: #005f73; 
+  font-weight: 700; 
 }
-/* Formulario */
+
 .patient-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* Campos de entrada */
+
 .patient-form input {
   width: 100%;
   padding: 12px;
@@ -51,7 +49,7 @@
 }
 
 
-/* Botones */
+
 .button-uniform,
 .button-large {
   background: linear-gradient(135deg, #005f73, #003f4f);
@@ -73,7 +71,7 @@
   
 }
 
-/* Tabla de tratamientos */
+
 .treatment-table {
   width: 100%;
   border-collapse: collapse;
@@ -97,7 +95,7 @@
   
 }
 
-/* Botón eliminar tratamiento */
+
 .remove-treatment {
   background: #f44336;
   color: white;
@@ -114,7 +112,7 @@
   background: #d32f2f;
 }
 
-/* Modal */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -144,7 +142,7 @@
   color: #003f4f;
 }
 
-/* Lista de enfermedades en modal */
+
 .disease-list {
   display: flex;
   flex-direction: column;
@@ -171,7 +169,7 @@
   border-color: #00acc1;
 }
 
-/* Botón de cerrar modal */
+
 .button-close {
   background: #dc3545;
   color: white;
@@ -191,7 +189,7 @@
 }
 
 .create-patient-box:hover {
-  transform: translateY(-5px); /* Igual que en about-box */
+  transform: translateY(-5px); 
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
 }
 
@@ -212,7 +210,7 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
  }
 .preview-modal:hover{
-    transform: translateY(-5px); /* Igual que en about-box */
+    transform: translateY(-5px); 
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
 }
 .preview-modal h2 {

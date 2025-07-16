@@ -10,7 +10,7 @@ function MyPatientsDashboard() {
 
   const token = localStorage.getItem('jwtToken');
 
-  // ✅ Llamada para obtener la versión aprobada según disease._id
+
   const fetchApprovedVersion = async (diseaseId) => {
     if (!diseaseId || approvedVersions[diseaseId]) return;
     try {
@@ -40,7 +40,7 @@ function MyPatientsDashboard() {
         const data = response.data || [];
         setPatients(data);
 
-        // 🔁 Buscar las versiones aprobadas de cada enfermedad
+
         data.forEach((patient) => {
           if (patient.disease?._id) {
             fetchApprovedVersion(patient.disease._id);

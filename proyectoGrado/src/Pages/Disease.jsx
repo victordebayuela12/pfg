@@ -36,7 +36,7 @@ function DiseaseDetails() {
         { rejectionComment: comment },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      navigate('/adminDisease'); // ✅ Redirección tras éxito
+      navigate('/adminDisease'); 
     } catch (err) {
       console.error(`Error al cambiar el estado a ${status}:`, err);
       setError('No se pudo cambiar el estado de la enfermedad.');
@@ -112,7 +112,7 @@ function DiseaseDetails() {
         onClose={() => setIsModalOpen(false)}
         onConfirm={async (comment) => {
           await handleStatusChange('rejected', comment);
-          // No es necesario cerrar el modal manualmente si se navega
+        
         }}
       />
     </div>

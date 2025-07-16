@@ -1,4 +1,4 @@
-/* Contenedor principal de edición */
+
 .edit-disease-container {
   display: flex;
   justify-content: center;
@@ -9,7 +9,7 @@
   box-sizing: border-box;
 }
 
-/* Caja del formulario */
+
 .edit-disease-box {
   background: white;
   padding: 50px;
@@ -22,17 +22,17 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .edit-disease-box h1 {
-  font-size: 2.8rem; /* Tamaño destacado */
+  font-size: 2.8rem; 
   margin-bottom: 20px;
-  color: #005f73; /* Azul profesional */
-  font-weight: 700; /* Hace que destaque */
+  color: #005f73; 
+  font-weight: 700; 
 }
 .edit-disease-box:hover {
   transform: translateY(-5px);
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Formulario */
+
 .disease-form {
   display: flex;
   flex-direction: column;
@@ -45,7 +45,7 @@
   margin-bottom: 10px;
 }
 
-/* Inputs y textarea */
+
 .disease-form input,
 .disease-form textarea {
   width: 100%;
@@ -67,7 +67,7 @@ textarea {
   resize: vertical;
 }
 
-/* Botones */
+
 .button-large,
 .button-treatments,
 .button-add-description,
@@ -94,7 +94,7 @@ textarea {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Descripciones */
+
 .description-container {
   display: flex;
   flex-direction: column;
@@ -149,7 +149,7 @@ textarea {
   background-color: #d32f2f;
 }
 
-/* Tratamientos */
+
 .treatment-container {
   display: flex;
   flex-direction: column;
@@ -194,7 +194,7 @@ textarea {
   background-color: #d32f2f;
 }
 
-/* Modal */
+
 .modal-overlay {
   position: fixed;
   top: 0;

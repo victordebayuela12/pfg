@@ -68,7 +68,7 @@ const navigate = useNavigate();
   const hasNewline = text.includes('\n');
   const isLong = text.length > long;
   const shouldTruncate = isLong || hasNewline;
-  const preview = text.slice(0, long).replace(/\n/g, ' '); // opcional: quitar saltos de línea visibles
+  const preview = text.slice(0, long).replace(/\n/g, ' '); 
 
   return (
     <>

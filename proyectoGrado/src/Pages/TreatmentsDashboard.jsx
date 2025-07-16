@@ -103,7 +103,7 @@ const renderFieldWithModal = (text) => {
   const hasNewline = text.includes('\n');
   const isLong = text.length > 60;
   const shouldTruncate = isLong || hasNewline;
-  const preview = text.slice(0, 60).replace(/\n/g, ' '); // opcional: quitar saltos de línea visibles
+  const preview = text.slice(0, 60).replace(/\n/g, ' '); 
 
   return (
     <>

@@ -18,10 +18,10 @@
 }
 
 .edit-disease-box h1 {
-  font-size: 2.8rem; /* Tamaño destacado */
+  font-size: 2.8rem; 
   margin-bottom: 20px;
-  color: #005f73; /* Azul profesional */
-  font-weight: 700; /* Hace que destaque */
+  color: #005f73; 
+  font-weight: 700; 
 }
 .button-delete {
   width: 40px;
@@ -44,5 +44,5 @@
 }
 
 .description-box p {
-  margin-bottom: 10px; /* separa el texto del botón */
+  margin-bottom: 10px; 
 }

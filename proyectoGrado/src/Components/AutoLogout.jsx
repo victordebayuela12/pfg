@@ -3,34 +3,34 @@ import { useNavigate } from 'react-router-dom';
 
 const AutoLogout = ({ logout }) => {
     const navigate = useNavigate();
-    const timeoutRef = useRef(null); // useRef para manejar el timeout
+    const timeoutRef = useRef(null); 
 
-    // Función para reiniciar el temporizador, envuelta en useCallback
+   
     const resetTimer = useCallback(() => {
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
         timeoutRef.current = setTimeout(() => {
-            logout(); // Cierra sesión
-            navigate('/login'); // Redirigir al login
-        }, 30 * 60 * 1000); // 30 minutos de inactividad
-    }, [logout, navigate]); // Se asegura de no cambiar en cada render
+            logout();
+            navigate('/login'); 
+        }, 30 * 60 * 1000); 
+    }, [logout, navigate]); 
 
     useEffect(() => {
-        // Detectar eventos de actividad del usuario
+       
         window.addEventListener('mousemove', resetTimer);
         window.addEventListener('keydown', resetTimer);
 
-        resetTimer(); // Inicializa el temporizador
+        resetTimer(); 
 
         return () => {
-            // Limpiar eventos y timeout al desmontar el componente
+         
             window.removeEventListener('mousemove', resetTimer);
             window.removeEventListener('keydown', resetTimer);
             if (timeoutRef.current) clearTimeout(timeoutRef.current);
         };
-    }, [resetTimer]); // Ahora `resetTimer` está correctamente en la lista de dependencias
+    }, [resetTimer]); 
 
-    return null; // No renderiza nada en la UI
+    return null; 
 };
 
 export default AutoLogout;
