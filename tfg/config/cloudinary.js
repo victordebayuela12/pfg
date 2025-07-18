@@ -11,8 +11,12 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
     cloudinary,
     params: {
-        folder: 'tfg-images',
-        format: async (req, file) => ['png','jpg','jpeg'],
+        folder: 'tfg-images2',
+        format: async (req, file) => {
+  const mime = file.mimetype.split('/')[1]; // Ej: "jpeg" o "png"
+  return mime === 'jpeg' || mime === 'jpg' || mime === 'png' ? mime : 'png';
+},
+
         public_id: (req, file) => Date.now() + '-' + file.originalname
     }
 });

@@ -3,13 +3,22 @@ const Disease = require('../models/Disease');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
+const mongoose = require('mongoose');
+
+
+// ✅ Asegúrate de tener multer configurado previamente para aceptar múltiples archivos
 
 exports.createDiseaseVersion = async (req, res) => {
-  try {
-    const { diseaseId, resume, descriptions, treatments } = req.body;
-    const doctorId = req.user_id;
+  console.log("🧪 Recibido:");
+  console.log("BODY:", req.body);
+  console.log("FILES:", req.files);
+  console.log("USER ID:", req.user_id);
 
-    if (!diseaseId || !resume || !Array.isArray(descriptions)) {
+  try {
+    const doctorId = req.user_id;
+    const { diseaseId, resume, treatments = [] } = req.body;
+
+    if (!diseaseId || !resume) {
       return res.status(400).json({ message: "Faltan datos obligatorios." });
     }
 
@@ -23,34 +32,44 @@ exports.createDiseaseVersion = async (req, res) => {
       return res.status(403).json({ message: "Solo los doctores pueden crear versiones de enfermedades." });
     }
 
-    const processedDescriptions = descriptions.map((desc, index) => {
-      let imageUrl = null;
-      if (req.files && Array.isArray(req.files)) {
-        const file = req.files.find(file => file.fieldname === `description-${index}`);
-        if (file) imageUrl = file.path;
-      }
-      return {
-        descripcion: desc.descripcion,
-        image: imageUrl
-      };
-    });
+    // ✅ Construcción de descripciones
+    const descriptions = [];
+    let index = 0;
+    while (req.body[`descripcion-${index}`] !== undefined) {
+      const descripcion = req.body[`descripcion-${index}`];
+      const imageFile = req.files?.find(f => f.fieldname === `description-${index}`);
+      descriptions.push({
+        descripcion,
+        image: imageFile?.path || null,
+      });
+      index++;
+    }
 
     const newVersion = new DiseaseVersion({
       disease: disease._id,
       resume,
-      descriptions: processedDescriptions,
-      treatments,
+      descriptions,
+      treatments: Array.isArray(treatments) ? treatments : [treatments],
       doctorCreador: doctorId,
-      status: "pending"
+      status: "pending",
     });
 
     await newVersion.save();
-    res.status(201).json({ message: "Versión de enfermedad creada.", disease, diseaseVersion: newVersion });
+
+    res.status(201).json({
+      message: "Versión de enfermedad creada con éxito.",
+      diseaseVersion: newVersion,
+    });
 
   } catch (error) {
-    res.status(500).json({ message: "Error al crear la versión de enfermedad" });
+    console.error("🔥 Error:", error);
+    res.status(500).json({
+      message: "Error al crear la versión de enfermedad.",
+      error: error?.message || String(error),
+    });
   }
 };
+
 
 exports.getDiseaseVersions = async (req, res) => {
   try {
@@ -214,90 +233,80 @@ exports.getVersionsByDoctorAndStatus = async (req, res) => {
     res.status(500).json({ message: "Error al obtener versiones del doctor" });
   }
 };
-
-
-exports.updateDiseaseVersion = async (req, res) => {
-    try {
-        const { id } = req.params;
-        const updates = req.body;
-
-        updates.status = 'pending';
-
-        const updatedVersion = await DiseaseVersion.findByIdAndUpdate(id, updates, {
-            new: true,
-            runValidators: true
-        });
-
-        if (!updatedVersion) {
-            return res.status(404).json({ message: 'Versión de enfermedad no encontrada' });
-        }
-
-        res.json(updatedVersion);
-    } catch (err) {
-        console.error('Error actualizando la versión:', err);
-        res.status(500).json({ message: 'Error al actualizar la versión de enfermedad' });
-    }
-};
-
-exports.editRejectedDiseaseVersion = async (req, res) => {
+exports.editDiseaseVersion = async (req, res) => {
   try {
     const versionId = req.params.id;
     const userId = req.user_id;
+
 
     const version = await DiseaseVersion.findById(versionId);
     if (!version) {
       return res.status(404).json({ message: "Versión no encontrada" });
     }
 
-    if (version.status !== 'rejected') {
-      return res.status(400).json({ message: "Solo se pueden editar versiones rechazadas" });
-    }
 
     if (version.doctorCreador.toString() !== userId) {
       return res.status(403).json({ message: "No tienes permiso para editar esta versión" });
     }
 
+    const { name, resume } = req.body;
+    if (!resume || !name) {
+      return res.status(400).json({ message: "Faltan datos obligatorios: nombre o resumen" });
+    }
 
-    version.resume = req.body.resume || version.resume;
 
-    const rawDescriptions = JSON.parse(req.body.descriptions || '[]');
+    const descriptions = [];
+    let index = 0;
+    while (req.body[`descripcion-${index}`] !== undefined) {
+      let rawDescripcion = req.body[`descripcion-${index}`];
 
-    const processedDescriptions = rawDescriptions.map((desc, index) => {
+
+      const descripcion = Array.isArray(rawDescripcion)
+        ? rawDescripcion.join(" ")
+        : String(rawDescripcion);
+
       const file = req.files?.find(f => f.fieldname === `description-${index}`);
-      const imageUrl = file?.path || (desc.image !== '__upload__' ? desc.image : null);
-      return {
-        descripcion: desc.descripcion,
-        image: imageUrl
-      };
-    });
+      const previousImage = req.body[`existing-image-${index}`];
 
-    version.descriptions = processedDescriptions;
+      descriptions.push({
+        descripcion,
+        image: file?.path || previousImage || null,
+      });
 
-
-const treatmentEntries = Object.keys(req.body)
-  .filter(key => key.startsWith('treatments['))
-  .map(key => {
-    const match = key.match(/treatments\[(\d+)\]/);
-    return match ? { index: parseInt(match[1]), value: req.body[key] } : null;
-  })
-  .filter(Boolean)
-  .sort((a, b) => a.index - b.index);
-  console.log("Tratamientos enviados:", req.body.treatments);
-
-version.treatments = JSON.parse(req.body.treatments || '[]');
+      index++;
+    }
 
 
-    version.status = 'pending';
+    let treatmentIds = [];
+    try {
+      treatmentIds = JSON.parse(req.body.selectedTreatments || "[]");
+    } catch (error) {
+      console.warn("⚠️ Error al parsear tratamientos:", error);
+      treatmentIds = [];
+    }
+
+    version.name = name;
+    version.resume = resume;
+    version.descriptions = descriptions;
+    version.treatments = Array.isArray(treatmentIds) ? treatmentIds : [];
+    version.status = "pending";
 
     await version.save();
 
-    res.status(200).json({
-      message: "Versión editada y reenviada correctamente",
-      version
+    return res.status(200).json({
+      message: "Versión editada correctamente",
+      version,
     });
 
   } catch (error) {
-    console.error("❌ Error al editar la versión rechazada:", error);
-    res.status(500).json({ message: "Error interno del servidor" });
+    console.error("❌ Error al editar la versión:", error);
+    return res.status(500).json({
+      message: "Error interno del servidor",
+      error: {
+        name: error.name,
+        message: error.message,
+        stack: error.stack,
+      },
+    });
   }
 };

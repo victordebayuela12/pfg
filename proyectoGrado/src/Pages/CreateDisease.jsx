@@ -4,6 +4,7 @@ import "./CreateDisease.css";
 import { calcularIFSZ, interpretarIFSZ } from "../Utils/IFSZ";
 
 function CreateDisease() {
+  
   const [formData, setFormData] = useState({
     name: "",
     resume: "",
@@ -112,45 +113,82 @@ function CreateDisease() {
     setDiseaseExists(!!match);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem("jwtToken");
-    const doctorId = localStorage.getItem("userId");
-    if (!doctorId) return alert("No se encontró el ID del doctor.");
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const token = localStorage.getItem("jwtToken");
+  const doctorId = localStorage.getItem("userId");
+  if (!doctorId) return alert("No se encontró el ID del doctor.");
 
-    try {
-      const config = { headers: { Authorization: `Bearer ${token}` } };
-      const diseasesRes = await axios.get("http://localhost:5000/api/diseases", config);
-      let disease = diseasesRes.data.find((d) => d.name.toLowerCase() === formData.name.trim().toLowerCase());
+  try {
+    const jsonConfig = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    };
 
-      if (!disease) {
-        const res = await axios.post("http://localhost:5000/api/diseases", { name: formData.name }, config);
-        disease = res.data;
-      }
+    const diseasesRes = await axios.get("http://localhost:5000/api/diseases", jsonConfig);
+    let disease = diseasesRes.data.find(
+      (d) => d.name.toLowerCase() === formData.name.trim().toLowerCase()
+    );
 
-      const formDataToSend = new FormData();
-      formDataToSend.append("diseaseId", disease._id);
-      formDataToSend.append("resume", formData.resume);
-      formData.selectedTreatments.forEach((id, i) => formDataToSend.append(`treatments[${i}]`, id));
-
-      for (let i = 0; i < formData.descriptions.length; i++) {
-        const desc = formData.descriptions[i];
-        formDataToSend.append(`descriptions[${i}][descripcion]`, desc.descripcion);
-
-        if (desc.image instanceof File) {
-          const resizedImage = await resizeImage(desc.image);
-          formDataToSend.append(`description-${i}`, resizedImage);
-        }
-      }
-
-      await axios.post("http://localhost:5000/api/diseaseVersions/", formDataToSend, config);
-      alert("Versión de enfermedad creada con éxito.");
-      setFormData({ name: "", resume: "", descriptions: [], selectedTreatments: [] });
-    } catch (err) {
-      console.error("Error:", err.response?.data || err.message);
-      alert("Hubo un problema al crear la enfermedad.");
+    if (!disease) {
+      const createRes = await axios.post(
+        "http://localhost:5000/api/diseases",
+        { name: formData.name },
+        jsonConfig
+      );
+      disease = createRes.data;
     }
-  };
+
+    const formDataToSend = new FormData();
+    formDataToSend.append("diseaseId", disease._id);
+    formDataToSend.append("resume", formData.resume);
+    formData.selectedTreatments.forEach((id, i) =>
+      formDataToSend.append(`treatments[${i}]`, id)
+    );
+
+    // ✅ Enviar cada descripción con clave simple
+    for (let i = 0; i < formData.descriptions.length; i++) {
+      const desc = formData.descriptions[i];
+      formDataToSend.append(`descripcion-${i}`, desc.descripcion);
+      if (desc.image instanceof File) {
+        const resizedImage = await resizeImage(desc.image);
+        formDataToSend.append(`description-${i}`, resizedImage);
+      }
+    }
+
+    const formConfig = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+
+    await axios.post(
+      "http://localhost:5000/api/diseaseVersions/",
+      formDataToSend,
+      formConfig
+    );
+
+    alert("Versión de enfermedad creada con éxito.");
+    setFormData({
+      name: "",
+      resume: "",
+      descriptions: [],
+      selectedTreatments: [],
+    });
+
+  } catch (err) {
+    const responseText = err.response?.data || err.message;
+    console.error("Error:", JSON.stringify(responseText, null, 2));
+    alert(typeof responseText === "string"
+      ? responseText
+      : JSON.stringify(responseText, null, 2));
+  }
+};
+
+
 return (
   <div className="create-disease-container">
     <div className="create-disease-box">
