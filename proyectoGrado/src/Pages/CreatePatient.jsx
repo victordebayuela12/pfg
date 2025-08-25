@@ -115,37 +115,53 @@ const fetchApprovedDiseaseDetails = async (diseaseId) => {
     };
 
     
+    const [success, setSuccess] = useState('');
+
     const handleSubmit = async (e) => {
-        e.preventDefault();
+  e.preventDefault();
+  setSuccess('');
 
-        const token = localStorage.getItem("jwtToken");
-        const doctorId = localStorage.getItem("userId");
-        const generatedPassword = generateRandomPassword(); 
-        if (!doctorId) {
-            alert("No se encontró el ID del doctor en localStorage.");
-            return;
-        }
+  const token = localStorage.getItem("jwtToken");
+  const doctorId = localStorage.getItem("userId");
+  const generatedPassword = generateRandomPassword();
 
-        const formDataToSend = {
-            name: formData.name,
-            email: formData.email,
-            password: generatedPassword,
-            doctor: doctorId,
-            disease: formData.selectedDisease,
-            treatments: formData.selectedTreatments
-            
-        };
+  if (!doctorId) {
+    alert("No se encontró el ID del doctor en localStorage.");
+    return;
+  }
 
-        try {
-            await axios.post("http://localhost:5000/api/patients/register", formDataToSend, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            alert("Paciente creado con éxito.");
-        } catch (err) {
-            console.error("Error al crear el paciente:", err);
-            alert("Hubo un problema al crear el paciente.");
-        }
-    };
+  const formDataToSend = {
+    name: formData.name,
+    email: formData.email,
+    password: generatedPassword,
+    doctor: doctorId,
+    disease: formData.selectedDisease,
+    treatments: formData.selectedTreatments
+  };
+
+  try {
+    await axios.post("http://localhost:5000/api/patients/register", formDataToSend, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    setSuccess("✅ Paciente creado con éxito.");
+
+    // Limpia los datos del formulario
+    setFormData({
+      name: "",
+      email: "",
+      selectedDisease: "",
+      selectedTreatments: []
+    });
+
+    // También podrías cerrar los modales si están abiertos
+    setShowDiseaseModal(false);
+    setShowTreatmentModal(false);
+  } catch (err) {
+    console.error("Error al crear el paciente:", err);
+    alert("Hubo un problema al crear el paciente.");
+  }
+};
+
 
 return (
   <center>
@@ -153,6 +169,7 @@ return (
       <div className="create-patient-box">
         <h1>Crear Paciente</h1>
         <p>Formulario de creación de paciente</p>
+{success && <p className="success-message">{success}</p>}
 
         <form className="patient-form" onSubmit={handleSubmit}>
           <input
@@ -288,9 +305,9 @@ return (
                         <div className="treatment-list">
                         {filteredTreatments.map((treatment) => (
   <div key={treatment._id} className="treatment-item">
-    <p className="treatment-name" onClick={() => handlePreviewTreatment(treatment._id)}>
+    <h className="treatment-name" onClick={() => handlePreviewTreatment(treatment._id)}>
       {treatment.name}
-    </p>
+    </h>
     <button
       className="select-treatment-btn"
       onClick={() => handleSelectTreatment(treatment._id)}
@@ -308,38 +325,39 @@ return (
                 </div>
             )}
 
-            {/* Modal de vista previa de tratamientos */}
-            {selectedTreatmentDetails && (
-              <div className="modal-overlay">
-                <div className="preview-modal">
-                  <h2>{selectedTreatmentDetails.name}</h2>
+{/* Modal de vista previa de tratamientos */}
+{selectedTreatmentDetails && (
+  <div className="modal-overlay">
+    <div className="preview-modal">
+      <h2>{selectedTreatmentDetails.name}</h2>
 
-                  <div className="preview-section">
-                    <h4>📄 Descripciones</h4>
-                    {selectedTreatmentDetails.descriptions.map((desc, index) => (
-                      <div key={index} className="preview-card">
-                        <p>{desc.descripcion}</p>
-                        {desc.image && <img src={desc.image} alt="Descripción" />}
-                      </div>
-                    ))}
-                  </div>
+      <div className="preview-section">
+        <h4>✅ Beneficios</h4>
+        <p>{selectedTreatmentDetails.benefits}</p>
+      </div>
 
-                  <div className="preview-section">
-                    <h4>✅ Beneficios</h4>
-                    <p>{selectedTreatmentDetails.benefits}</p>
-                  </div>
+      <div className="preview-section">
+        <h4>⚠️ Riesgos</h4>
+        <p>{selectedTreatmentDetails.risks}</p>
+      </div>
 
-                  <div className="preview-section">
-                    <h4>⚠️ Riesgos</h4>
-                    <p>{selectedTreatmentDetails.risks}</p>
-                  </div>
+      <div className="preview-section">
+        <h4>📄 Descripciones</h4>
+        {selectedTreatmentDetails.descriptions.map((desc, index) => (
+          <div key={index} className="preview-card">
+            <p>{desc.descripcion}</p>
+            {desc.image && <img src={desc.image} alt="Descripción" />}
+          </div>
+        ))}
+      </div>
 
-                  <button className="button-close" onClick={closePreviewModal}>
-                    Cerrar
-                  </button>
-                </div>
-              </div>
-)}          {showDiseasePreview && selectedDiseaseDetails && (
+      <button className="button-close" onClick={closePreviewModal}>
+        Cerrar
+      </button>
+    </div>
+  </div>
+)}
+       {showDiseasePreview && selectedDiseaseDetails && (
   <div className="modal-overlay">
     <div className="preview-modal">
       <h2>🧬 {selectedDiseaseDetails.disease?.name || "Enfermedad"}</h2>

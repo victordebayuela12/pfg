@@ -11,34 +11,42 @@ function ChangePassword() {
 
   const token = localStorage.getItem('jwtToken');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setSuccess('');
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
+  setSuccess('');
 
-    if (newPassword !== confirm) {
-      setError('Las contraseñas no coinciden.');
-      return;
-    }
+  const regexMayuscula = /[A-Z]/;
+  const regexSimbolo = /[^A-Za-z0-9]/;
 
-    try {
-      await axios.post(
-        'http://localhost:5000/api/users/change-password',
-        { currentPassword, newPassword },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+  if (newPassword.length < 8 || !regexMayuscula.test(newPassword) || !regexSimbolo.test(newPassword)) {
+    setError('La nueva contraseña debe tener al menos 8 caracteres, una mayúscula y un símbolo.');
+    return;
+  }
 
-      setSuccess('✅ Contraseña actualizada correctamente.');
-      setCurrentPassword('');
-      setNewPassword('');
-      setConfirm('');
-    } catch (err) {
-      console.error(err);
-      setError(
-        err.response?.data?.message || '❌ Error al cambiar la contraseña.'
-      );
-    }
-  };
+  if (newPassword !== confirm) {
+    setError('Las contraseñas no coinciden.');
+    return;
+  }
+
+  try {
+    await axios.post(
+      'http://localhost:5000/api/users/change-password',
+      { currentPassword, newPassword },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    setSuccess('✅ Contraseña actualizada correctamente.');
+    setCurrentPassword('');
+    setNewPassword('');
+    setConfirm('');
+  } catch (err) {
+    console.error(err);
+    setError(
+      err.response?.data?.message || '❌ Error al cambiar la contraseña.'
+    );
+  }
+};
 
   return (
     <div className="change-password-container">

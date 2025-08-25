@@ -129,6 +129,18 @@ function CreateTreatment() {
             onChange={handleInputChange}
             required
           />
+           {formData.benefits.trim() && (() => {
+        const score = calcularIFSZ(formData.benefits);
+        const { grado, color } = interpretarIFSZ(score);
+        return (
+          <p>
+            <strong>IFSZ de beneficios:</strong>{" "}
+            <span style={{ color, fontWeight: "bold" }}>
+              {score.toFixed(2)} ({grado})
+            </span>
+          </p>
+        );
+      })()}
           <textarea
             name="risks"
             placeholder="Riesgos del Tratamiento"
@@ -136,14 +148,30 @@ function CreateTreatment() {
             onChange={handleInputChange}
             required
           />
-
+          {formData.risks.trim() && (() => {
+                  const score = calcularIFSZ(formData.risks);
+                  const { grado, color } = interpretarIFSZ(score);
+                  return (
+                    <p>
+                      <strong>IFSZ de riesgos:</strong>{" "}
+                      <span style={{ color, fontWeight: "bold" }}>
+                        {score.toFixed(2)} ({grado})
+                      </span>
+                    </p>
+                  );
+                })()}
           <h3>Añadir Descripciones</h3>
           <textarea
-            placeholder="Descripción detallada"
-            value={descriptionInput}
-            onChange={(e) => setDescriptionInput(e.target.value)}
-            className="textarea-large"
-          />
+  placeholder="Descripción detallada (máx. 255 caracteres)"
+  value={descriptionInput}
+  onChange={(e) => {
+    const value = e.target.value;
+    if (value.length <= 255) {
+      setDescriptionInput(value);
+    }
+  }}
+  className="textarea-large"
+/>
           <input
             type="file"
             accept="image/*"

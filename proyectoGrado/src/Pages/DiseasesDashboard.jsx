@@ -61,23 +61,26 @@ const renderFieldWithModal = (text,long) => {
       setError('Hubo un problema al cargar las enfermedades.');
     }
   };
+const updateStatus = async (id, status, rejectionComment = '') => {
+  try {
+    const token = localStorage.getItem("jwtToken");
+    await axios.patch(
+      `http://localhost:5000/api/diseaseVersions/${id}/status/${status}`,
+      { rejectionComment },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    fetchDiseases();
+    setSuccess(`Enfermedad ${status === 'approved' ? 'aprobada' : 'rechazada'} con éxito.`);
+    setTimeout(() => setSuccess(''), 3000);
+  } catch (err) {
+    console.error('Error al actualizar estado:', err);
+    
+    const serverMessage = err.response?.data?.message;
+    setError(serverMessage || 'Hubo un problema al actualizar el estado de la enfermedad.');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+};
 
-  const updateStatus = async (id, status, rejectionComment = '') => {
-    try {
-      const token = localStorage.getItem("jwtToken");
-      await axios.patch(
-        `http://localhost:5000/api/diseaseVersions/${id}/status/${status}`,
-        { rejectionComment },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      fetchDiseases();
-      setSuccess(`Enfermedad ${status === 'approved' ? 'aprobada' : 'rechazada'} con éxito.`);
-      setTimeout(() => setSuccess(''), 3000);
-    } catch (err) {
-      console.error('Error al actualizar estado:', err);
-      setError('Hubo un problema al actualizar el estado de la enfermedad.');
-    }
-  };
 
   const deleteDisease = async (id) => {
     try {
@@ -125,8 +128,10 @@ const renderFieldWithModal = (text,long) => {
               <th>Nombre</th>
               <th>Resumen</th>
               <th>Descripciones</th>
-             <th>Tratamientos</th>
+              <th>Tratamientos</th>
               <th>Acciones</th>
+             
+              
             </tr>
           </thead>
           <tbody>
@@ -212,7 +217,7 @@ const renderFieldWithModal = (text,long) => {
               onClick={() => updateStatus(disease._id, 'approved')}
               className="action-button approve-button"
             >
-              Aceptar
+              Aprobar
             </button>
             <button
               onClick={() => deleteDisease(disease._id)}

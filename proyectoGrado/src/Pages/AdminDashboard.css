@@ -68,7 +68,7 @@ body {
 
 .modern-table th,
 .modern-table td {
-  font-size: 17px;
+  font-size: 1.25rem;
   padding: 12px 16px;
   border-bottom: 1px solid #ddd;
   white-space: nowrap;
@@ -167,7 +167,7 @@ a.disease-link:hover {
   width: 300px;
   max-width: 90vw;
   z-index: 999;
-  font-size: 0.95rem;
+  font-size: 1.25rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   text-align: left;
   line-height: 1.5;

@@ -177,14 +177,36 @@ if (desc.image instanceof File) {
             onChange={(e) => setFormData({ ...formData, resume: e.target.value })}
             required
           ></textarea>
+          
+                    {formData.resume.trim() && (() => {
+                      const score = calcularIFSZ(formData.resume);
+                      const { grado, color } = interpretarIFSZ(score);
+                      return (
+                        <div className="infz-total">
+                          <h4>IFSZ del resumen:</h4>
+                          <p>
+                            <span style={{ color, fontWeight: "bold" }}>
+                              {score.toFixed(2)} ({grado})
+                            </span>
+                          </p>
+                        </div>
+                      );
+                    })()}
+                  
 
           <h3>📸 Añadir Descripciones</h3>
           <textarea
-            placeholder="Descripción detallada"
-            value={descriptionInput}
-            onChange={(e) => setDescriptionInput(e.target.value)}
-            className="textarea-large"
-          />
+          placeholder="Descripción detallada (máx. 255 caracteres)"
+          value={descriptionInput}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (value.length <= 255) {
+              setDescriptionInput(value);
+            }
+          }}
+          className="textarea-large"
+        />
+
           <input
             type="file"
             accept="image/*"

@@ -85,9 +85,10 @@ const renderFieldWithModal = (text,long) => {
               <th>Nombre</th>
               <th>Resumen</th>
               <th>Descripciones</th>
-              {status === 'rejected' && <th>Comentarios del rechazo</th>}
-              <th>Acciones</th>
+             
               <th>Tratamientos</th>
+               {status === 'rejected' && <th>Comentarios del rechazo</th>}
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>

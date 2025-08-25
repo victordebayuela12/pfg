@@ -1,43 +1,36 @@
-
+/* 🌟 Contenedor general */
 .create-disease-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color:transparent;
   padding: 20px;
+  background-color: transparent;
   box-sizing: border-box;
 }
-
 
 .create-disease-box {
   background: white;
   padding: 50px;
   border-radius: 15px;
-  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   max-width: 800px;
+  width: 100%;
   box-sizing: border-box;
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.create-disease-box h1 {
-  font-size: 2.8rem;
-  margin-bottom: 20px;
-  color: #005f73; 
-  font-weight: 700; 
+.create-disease-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
+
+/* 🧾 Formulario */
 .disease-form {
   display: flex;
-  
   flex-direction: column;
   gap: 20px;
-}
-
-.disease-form h3 {
-  font-size: 1.2rem;
-  color: #003f4f;
-  margin-bottom: 10px;
 }
 
 .disease-form input,
@@ -47,7 +40,6 @@
   font-size: 1.2rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  box-sizing: border-box;
   transition: border-color 0.3s ease;
 }
 
@@ -60,14 +52,16 @@
 textarea {
   resize: vertical;
 }
+
+/* 📎 Input de archivo */
 .input-file {
   font-size: 0.9rem;
   padding: 6px;
   background-color: #f9f9f9;
   border: 1px solid #ccc;
   border-radius: 6px;
-  cursor: pointer;
   width: 100%;
+  cursor: pointer;
 }
 
 .input-file::file-selector-button {
@@ -84,10 +78,9 @@ textarea {
   background-color: #003f4f;
 }
 
+/* 🎯 Botones */
 .button-uniform,
 .button-large,
-.button-treatments,
-.button-add-description,
 .button-close,
 .select-treatment-btn {
   background: linear-gradient(135deg, #005f73, #003f4f);
@@ -97,167 +90,30 @@ textarea {
   padding: 12px;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-.button-secondary {
-  background: linear-gradient(135deg, #005f73, #003f4f);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 12px 16px;
-  font-size: 1.2rem;
-  cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
- 
 }
 
-.button-secondary:hover {
+.button-close {
+  display: block;
+  margin: 20px auto 0;
+  font-size: 1.1rem;
+  padding: 12px 18px;
+}
+
+.button-uniform:hover,
+.button-large:hover,
+.button-close:hover,
+.select-treatment-btn:hover {
   background: linear-gradient(135deg, #00788a, #005f73);
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
-.button-uniform:hover,
-.button-large:hover,
-.button-treatments:hover,
-.button-add-description:hover,
-.button-close:hover,
-.select-treatment-btn:hover {
-  background: linear-gradient(135deg, #005f73, #003f4f);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
 
-.description-container {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-top: 10px;
-  margin-bottom:10px;
-}
-
-.description-box {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  padding: 14px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-
-.description-box p {
-  margin: 0;
-  line-height: 1.5;
-  word-break: break-word;
-  max-width: 100%;
-}
-
-
-.description-box img {
-  width: 90px;
-  height: 90px;
-  object-fit: cover;
-  border-radius: 6px;
-  margin-left: 15px;
-}
-
-.description-box .remove-description {
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  background-color: #f44336;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 1.1rem;
-  width: 26px;
-  height: 26px;
-  cursor: pointer;
-}
-
-.description-box .remove-description:hover {
-  background-color: #d32f2f;
-}
-
-.infz-total {
-  margin-top: 10px;
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-.status-message {
-  font-size: 0.95rem;
-  margin-top: -10px;
-  margin-bottom: 10px;
-}
-
-.status-message.existing {
-  color: #4caf50;
-}
-
-.status-message.new {
-  color: #00788a;
-}
-
-.treatment-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.treatment-selected {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-}
-
-.treatment-name {
-  color: #00788a;
-  text-decoration: underline;
-  cursor: pointer;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.treatment-name:hover {
-  color: #005f73;
-}
-
-.remove-treatment {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.remove-treatment:hover {
-  background-color: #d32f2f;
-}
-
+/* 🧬 Modal Preview Treatment */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0, 0, 0, 0.6);
   z-index: 9999;
   display: flex;
@@ -267,59 +123,131 @@ textarea {
 }
 
 .modal {
-  background: white;
-  border-radius: 12px;
-  padding: 30px 40px;
-  max-width: 600px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 650px;
   width: 100%;
   max-height: 85vh;
   overflow-y: auto;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  text-align: left;
 }
 
-.modal h2,
-.modal h3 {
-  margin-top: 0;
-  color: #003f4f;
+.modal h2 {
   text-align: center;
+  font-size: 2rem;
+  color: #005f73;
+  margin-bottom: 30px;
 }
 
-.modal p {
-  font-size: 0.95rem;
-  line-height: 1.5;
+.preview-section {
+  margin-bottom: 25px;
+}
+
+.preview-section h4 {
+  font-size: 1.5rem;
+  color: #197d91;
+  margin-bottom: 10px;
+}
+
+.preview-section p {
+  font-size: 1.1rem;
+  line-height: 1.6;
   color: #333;
 }
 
-
-.treatment-list {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom:10px;
+/* 📄 Tarjetas de descripción */
+.preview-card {
+  background: #f9ffff;
+  border: 1px solid #e0f2f1;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
-.treatment-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px dashed #ccc;
+.preview-card p {
+  margin: 0;
+  font-size: 1rem;
+  color: #444;
+}
+
+.preview-card img {
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔎 IFSZ centrado */
+.ifsz-centered {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #005f73;
+}
+/* ✨ Botones base */
+
+.button-uniform,
+.button-large,
+.button-close,
+.button-secondary,
+.select-treatment-btn {
+  background: linear-gradient(135deg, #005f73, #003f4f);
+  color: white;
+  border: none;
   border-radius: 8px;
-  padding: 10px 14px;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+  text-align: center;
 }
 
+/* 🌟 Hover universal */
+button:hover,
+.button-uniform:hover,
+.button-large:hover,
+.button-close:hover,
+.button-secondary:hover,
+.select-treatment-btn:hover {
+  background: linear-gradient(135deg, #00788a, #005f73);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ❌ Botón de eliminación */
+.remove-treatment,
+.description-box .remove-description1 {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-treatment:hover,
+.description-box .remove-description:hover {
+  background-color: #d32f2f;
+}
+
+/* ✅ Botón alternativo añadido */
 .select-treatment-btn.added {
   background: linear-gradient(135deg, #d32f2f, #b71c1c);
 }
 
 .select-treatment-btn.added:hover {
   background: linear-gradient(135deg, #ff5c5c, #d32f2f);
-}
-.create-disease-box {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.create-disease-box:hover {
-  transform: translateY(-5px); 
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
 }

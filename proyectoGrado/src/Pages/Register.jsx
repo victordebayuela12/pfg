@@ -13,6 +13,7 @@ function Register() {
   });
 
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -26,16 +27,24 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
+
+    const password = formData.password;
+    const regexMayuscula = /[A-Z]/;
+    const regexSimbolo = /[^A-Za-z0-9]/;
+
+    if (password.length < 8 || !regexMayuscula.test(password) || !regexSimbolo.test(password)) {
+      setError('La contraseña debe tener al menos 8 caracteres, una mayúscula y un símbolo.');
+      return;
+    }
 
     try {
       const response = await registerUser(formData);
-      alert(response.message);
-      navigate('/login');
+      setSuccess('✅ Se ha solicitado el alta de registro correctamente.');
+      setTimeout(() => navigate('/login'), 3000);
     } catch (err) {
       const backendError = err?.error;
-
       if (backendError?.errors) {
-       
         const messages = Object.values(backendError.errors).map(e => e.message).join('\n');
         setError(messages);
       } else {
@@ -43,7 +52,6 @@ function Register() {
       }
     }
   };
-
   return (
     <div className="register-container">
       <div className="register-box">
@@ -93,7 +101,7 @@ function Register() {
         </form>
 
         {error && <p className="error-message">{error}</p>}
-
+        {success && <p className="success-message">{success}</p>}
         <p className="form-footer">
           ¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a>
         </p>

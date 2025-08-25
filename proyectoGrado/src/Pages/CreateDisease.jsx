@@ -21,7 +21,7 @@ function CreateDisease() {
   const [existingDiseases, setExistingDiseases] = useState([]);
   const [diseaseExists, setDiseaseExists] = useState(null);
   const [diseaseList, setDiseaseList] = useState([]);
-
+  const [success, setSuccess] = useState("");
   const closePreviewModal = () => setSelectedTreatmentDetails(null);
 
   useEffect(() => {
@@ -114,6 +114,7 @@ function CreateDisease() {
   };
 
 const handleSubmit = async (e) => {
+  setSuccess("");
   e.preventDefault();
   const token = localStorage.getItem("jwtToken");
   const doctorId = localStorage.getItem("userId");
@@ -171,7 +172,8 @@ const handleSubmit = async (e) => {
       formConfig
     );
 
-    alert("Versión de enfermedad creada con éxito.");
+    
+    setSuccess("✅ Versión de enfermedad creada con éxito.");
     setFormData({
       name: "",
       resume: "",
@@ -193,6 +195,7 @@ return (
   <div className="create-disease-container">
     <div className="create-disease-box">
       <h1>Crear Enfermedad</h1>
+       {success && <p className="success-message">{success}</p>}
       <form className="disease-form" onSubmit={handleSubmit}>
         {/* Nombre de la enfermedad */}
         <input
@@ -221,23 +224,44 @@ return (
         )}
 
         {/* Resumen */}
-        <textarea
-          name="resume"
-          placeholder="Resumen"
-          value={formData.resume}
-          onChange={(e) =>
-            setFormData((prev) => ({ ...prev, resume: e.target.value }))
-          }
-          required
-        />
+          <textarea
+            name="resume"
+            placeholder="Resumen"
+            value={formData.resume}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, resume: e.target.value }))
+            }
+            required
+          />
+          {formData.resume.trim() && (() => {
+            const score = calcularIFSZ(formData.resume);
+            const { grado, color } = interpretarIFSZ(score);
+            return (
+              <div className="infz-total">
+                <h4>IFSZ del resumen:</h4>
+                <p>
+                  <span style={{ color, fontWeight: "bold" }}>
+                    {score.toFixed(2)} ({grado})
+                  </span>
+                </p>
+              </div>
+            );
+          })()}
+        
 
         {/* Añadir descripción */}
         <h3>Descripciones</h3>
-        <textarea
-          placeholder="Descripción"
-          value={descriptionInput}
-          onChange={(e) => setDescriptionInput(e.target.value)}
-        />
+       <textarea
+  placeholder="Descripción (máx. 255 caracteres)"
+  value={descriptionInput}
+  onChange={(e) => {
+    const value = e.target.value;
+    if (value.length <= 255) {
+      setDescriptionInput(value);
+    }
+  }}
+/>
+
         <input
           type="file"
           className="input-file"
@@ -264,7 +288,7 @@ return (
                   </span>
                 </p>
                 <button
-                  className="remove-description"
+                  className="remove-description1"
                   type="button"
                   onClick={() =>
                     setFormData((prev) => ({
@@ -336,9 +360,9 @@ return (
           <div className="treatment-list">
             {filteredTreatments.map((t) => (
               <div key={t._id} className="treatment-item">
-                <p className="treatment-name" onClick={() => handlePreviewTreatment(t._id)}>
+                <h className="treatment-name" onClick={() => handlePreviewTreatment(t._id)}>
                   {t.name} ({t.status === "pending" ? "Pendiente" : "Aprobado"})
-                </p>
+                </h>
                 <button
                   className={`select-treatment-btn ${formData.selectedTreatments.includes(t._id) ? "added" : ""}`}
                   onClick={() => handleSelectTreatment(t._id)}
@@ -353,30 +377,38 @@ return (
       </div>
     )}
 
-    {/* Modal de vista previa del tratamiento */}
-    {selectedTreatmentDetails && (
-      <div className="modal-overlay">
-        <div className="modal">
-          <h2>{selectedTreatmentDetails.name}</h2>
-          <p><strong>Beneficios:</strong> {selectedTreatmentDetails.benefits}</p>
-          <p><strong>Riesgos:</strong> {selectedTreatmentDetails.risks}</p>
-          <h3>Descripciones</h3>
-          <div className="description-container">
-            {selectedTreatmentDetails.descriptions.length > 0 ? (
-              selectedTreatmentDetails.descriptions.map((desc, index) => (
-                <div key={index} className="description-box">
-                  <p>{desc.descripcion}</p>
-                  {desc.image && <img src={desc.image} alt={`Descripción ${index}`} />}
-                </div>
-              ))
-            ) : (
-              <p>No hay descripciones disponibles.</p>
-            )}
-          </div>
-          <button className="button-close" onClick={closePreviewModal}>Cerrar</button>
-        </div>
+  {/* Modal de vista previa del tratamiento */}
+{selectedTreatmentDetails && (
+  <div className="modal-overlay">
+    <div className="modal">
+      <h2>{selectedTreatmentDetails.name}</h2>
+
+      <p><strong>Beneficios:</strong> {selectedTreatmentDetails.benefits}</p>
+      <p><strong>Riesgos:</strong> {selectedTreatmentDetails.risks}</p>
+
+      <h3>Descripciones</h3>
+      <div className="description-container">
+        {selectedTreatmentDetails.descriptions.length > 0 ? (
+          selectedTreatmentDetails.descriptions.map((desc, index) => (
+            <div key={index} className="description-box">
+              <p>{desc.descripcion}</p>
+              {desc.image && (
+                <img src={desc.image} alt={`Descripción ${index}`} />
+              )}
+            </div>
+          ))
+        ) : (
+          <p>No hay descripciones disponibles.</p>
+        )}
       </div>
-    )}
+
+      <button className="button-close" onClick={closePreviewModal}>
+        Cerrar
+      </button>
+    </div>
+  </div>
+)}
+
   </div>
 );
 }

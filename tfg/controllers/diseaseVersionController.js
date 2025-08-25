@@ -143,7 +143,6 @@ exports.getDiseaseVersionsByStatus = async (req, res) => {
     res.status(500).json({ message: "Error al obtener versiones" });
   }
 };
-
 exports.changeDiseaseVersionStatus = async (req, res) => {
   try {
     const { id, status } = req.params;
@@ -154,36 +153,41 @@ exports.changeDiseaseVersionStatus = async (req, res) => {
       return res.status(400).json({ message: "Estado no válido" });
     }
 
-    const version = await DiseaseVersion.findById(id);
+    const version = await DiseaseVersion.findById(id).populate('treatments');
     if (!version) {
       return res.status(404).json({ message: "Versión no encontrada" });
     }
 
-    version.status = status;
+    if (status === 'approved') {
+      const todosAprobados = version.treatments.every(t => t.status === 'approved');
+      if (!todosAprobados) {
+        return res.status(400).json({
+          message: "No se puede aprobar esta enfermedad. Todos los tratamientos asociados deben estar aprobados."
+        });
+      }
 
-    if (status === 'rejected') {
+      version.rejectionComment = "";
+
+      await Disease.findByIdAndUpdate(version.disease, {
+        version_aprobada: version._id,
+      });
+
+      await DiseaseVersion.updateMany(
+        {
+          disease: version.disease,
+          _id: { $ne: version._id },
+          status: 'approved'
+        },
+        {
+          status: 'rejected',
+          rejectionComment: 'Reemplazada por una versión más reciente.'
+        }
+      );
+    } else if (status === 'rejected') {
       version.rejectionComment = rejectionComment || "";
-    } else { version.rejectionComment = "";
-
-
-  await Disease.findByIdAndUpdate(version.disease, {
-    version_aprobada: version._id,
-  });
-
-
-  await DiseaseVersion.updateMany(
-    {
-      disease: version.disease,
-      _id: { $ne: version._id },     
-      status: 'approved'            
-    },
-    {
-      status: 'rejected',
-      rejectionComment: 'Reemplazada por una versión más reciente.'
     }
-  );
-}
 
+    version.status = status;
     await version.save();
 
     res.status(200).json({ message: `Versión marcada como ${status}`, version });

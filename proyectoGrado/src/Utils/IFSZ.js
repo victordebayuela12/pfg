@@ -36,7 +36,7 @@ export function interpretarIFSZ(score) {
   if (score >= 86) return { grado: "Muy fácil", color: "#90ee90" };
   if (score >= 76) return { grado: "Fácil", color: "#008000" };
   if (score >= 66) return { grado: "Bastante fácil", color: "#006400" };
-  if (score >= 51) return { grado: "Normal", color: "#ffff00" };
+  if (score >= 51) return { grado: "Normal", color: "#e6b800" };
   if (score >= 36) return { grado: "Bastante difícil", color: "#ff8c00" };
   if (score >= 16) return { grado: "Árido", color: "#ff6347" };
   return { grado: "Muy difícil", color: "#8b0000" };

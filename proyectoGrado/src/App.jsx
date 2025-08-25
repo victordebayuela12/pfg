@@ -14,7 +14,7 @@ import ResetPassword from './Pages/ResetPassword';
 import DiseaseDetails from './Pages/Disease';
 import TreatmentDetails from './Pages/TreatmentDetail';
 import UnityGame from './Pages/SeriousGame';
-
+import ResetPasswordAuth from './Pages/ResetPasswordAuth';
 import AdminDashboard from './Pages/AdminDashboard';
 import DiseasesDashboard from './Pages/DiseasesDashboard';
 import TreatmentsDashboard from './Pages/TreatmentsDashboard';
@@ -35,9 +35,13 @@ import './App.css';
 function App() {
   const [userRole, setUserRole] = useState(localStorage.getItem('role'));
   const location = useLocation();
+const isAuthenticated = !!localStorage.getItem('jwtToken');
 
-  const hideNavbarPaths = ['/', '/login', '/register', '/forgot-password', '/reset-password'];
-  const showNavbar = !hideNavbarPaths.includes(location.pathname);
+const hideNavbarPaths = ['/', '/login', '/register', '/forgot-password'];
+const hideResetPasswordForGuest = location.pathname === '/reset-password' && !isAuthenticated;
+
+const showNavbar = !hideNavbarPaths.includes(location.pathname) && !hideResetPasswordForGuest;
+
 
   const logout = () => {
     localStorage.removeItem('jwtToken');
@@ -71,6 +75,7 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/reset-passwordauth" element={<ResetPasswordAuth />} />
           <Route path="/disease/:id" element={<DiseaseDetails />} />
           <Route path="/treatment/:id" element={<TreatmentDetails />} />
           <Route path="/game" element={<UnityGame />} />
